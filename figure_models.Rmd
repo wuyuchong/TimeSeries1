@@ -234,6 +234,7 @@ dev.off()
 
 ```{r}
 pdf("figure/11.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Simulate MA(2)
 theta_1      = 0
 theta_2      = 0.7
@@ -253,6 +254,7 @@ dev.off()
 
 ```{r}
 pdf("figure/12.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Simulate MA(2)
 theta_1      = 0
 theta_2      = 1 
@@ -272,6 +274,7 @@ dev.off()
 
 ```{r}
 pdf("figure/13.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Simulate MA(2) 
 theta_1      = 0.8
 theta_2      = 0   
@@ -292,6 +295,7 @@ dev.off()
 
 ```{r}
 pdf("figure/14.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Simulate MA(2)
 theta_1      = 0.8
 theta_2      = 0.7  
@@ -312,6 +316,7 @@ dev.off()
 
 ```{r}
 pdf("figure/15.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Simulate MA(2)
 theta_1      = 0.8
 theta_2      = 1  
@@ -342,6 +347,7 @@ e    <- rnorm(NumObsSim)*sqrt(sigma2) # residual
 
 ```{r}
 pdf("figure/16.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(1)
 phi_1        = -1
 # Simulate/generate realization of AR
@@ -371,6 +377,7 @@ dev.off()
 
 ```{r}
 pdf("figure/17.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(1)
 phi_1        = -0.95
 # Simulate/generate realization of AR
@@ -399,6 +406,7 @@ dev.off()
 
 ```{r}
 pdf("figure/18.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(1)
 phi_1        = -0.75
 # Simulate/generate realization of AR
@@ -427,6 +435,7 @@ dev.off()
 
 ```{r}
 pdf("figure/19.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(1)
 phi_1        = 0
 # Simulate/generate realization of AR
@@ -455,6 +464,7 @@ dev.off()
 
 ```{r}
 pdf("figure/20.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(1)
 phi_1        = 0.75
 # Simulate/generate realization of AR
@@ -482,6 +492,7 @@ dev.off()
 
 ```{r}
 pdf("figure/21.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(1)
 phi_1        = 0.95 
 # Simulate/generate realization of AR
@@ -509,6 +520,7 @@ dev.off()
 
 ```{r}
 pdf("figure/22.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(1)
 phi_1        = 1
 # Simulate/generate realization of AR
@@ -541,6 +553,7 @@ dev.off()
 
 ```{r}
 pdf("figure/23.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 phi_1        = -0.9  # AR(1) parameter
 phi_2        = 0.1     # AR(2) parameter
 # Simulate/generate realization of AR
@@ -569,6 +582,7 @@ dev.off()
 
 ```{r}
 pdf("figure/24.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 # initiate series. Let the first two elements of y_AR be innovations
 phi_1        = -0.9
@@ -602,6 +616,7 @@ dev.off()
 
 ```{r}
 pdf("figure/25.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 phi_1        = -0.9
 phi_2        = 0.8
@@ -634,6 +649,7 @@ dev.off()
 
 ```{r}
 pdf("figure/26.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 phi_1        = 0  
 phi_2        = 0.1
@@ -663,6 +679,7 @@ dev.off()
 
 ```{r}
 pdf("figure/27.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 phi_1        = 0
 phi_2        = 0.2  
@@ -692,6 +709,7 @@ dev.off()
 
 ```{r}
 pdf("figure/28.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 phi_1        = 0
 phi_2        = 0.8  
@@ -720,6 +738,7 @@ dev.off()
 
 ```{r}
 pdf("figure/29.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 phi_1        = 0.7
 phi_2        = 0.1    
@@ -748,6 +767,7 @@ par(mfrow = c(1,1)) # resets to default
 
 ```{r}
 pdf("figure/30.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 phi_1        = 0.7
 phi_2        = 0.2  
@@ -778,6 +798,7 @@ dev.off()
 
 ```{r}
 pdf("figure/31.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # AR(2)
 phi_1        = 0.7
 phi_2        = 0.8  
@@ -811,6 +832,7 @@ dev.off()
 
 ```{r}
 pdf("figure/32.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Set parameters
 phi_1   = -0.90
 theta_1 = -0.4
@@ -837,6 +859,7 @@ dev.off()
 
 ```{r}
 pdf("figure/33.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Set parameters
 phi_1   = -0.90
 theta_1 = 0.4
@@ -863,6 +886,7 @@ dev.off()
 
 ```{r}
 pdf("figure/34.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Set parameters
 phi_1   = -0.80
 theta_1 = 0.4
@@ -889,6 +913,7 @@ dev.off()
 
 ```{r}
 pdf("figure/35.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Set parameters
 phi_1   = -0.80
 theta_1 = -0.4
@@ -915,6 +940,7 @@ dev.off()
 
 ```{r}
 pdf("figure/36.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Set parameters
 phi_1   = 0.90
 theta_1 = 0.4
@@ -941,6 +967,7 @@ dev.off()
 
 ```{r}
 pdf("figure/37.pdf", width = 10, height = 3)
+par(mfrow = c(1,3)) # resets to default
 # Set parameters
 phi_1   = 0.90
 theta_1 = -0.4
