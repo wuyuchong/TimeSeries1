@@ -551,20 +551,20 @@ For ARMA
     \hline
     $\theta{_1} = -1.0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/1}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/1}
     \end{minipage} \\
     \hline
     $\theta{_1} = -0.45$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/2}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/2}
     \end{minipage} \\
     \hline
     $\theta{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/3}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/3}
     \end{minipage} \\
     \\ 
     \hline
@@ -582,22 +582,22 @@ For ARMA
     \hline
     $\theta{_1}= 0.45$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/4}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/4}
     \end{minipage} \\
     \\ 
     \hline
     $\theta{_1} = 1$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/5}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/5}
     \end{minipage} \\
     \\ 
     \hline
     $\theta{_1} = 2$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/6}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/6}
     \end{minipage} \\
     \\ 
     \hline
@@ -618,20 +618,20 @@ For ARMA
     \hline
     $\theta{_1} = -0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/7}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/7}
     \end{minipage} \\
     \hline
     $\theta{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/10}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/10}
     \end{minipage} \\
     \hline
     $\theta{_1} = 0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/13}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/13}
     \end{minipage} \\
     \\ 
     \hline
@@ -649,22 +649,22 @@ For ARMA
     \hline
     $\theta{_1} = -0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/8}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/8}
     \end{minipage} \\
     \\ 
     \hline
     $\theta{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/11}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/11}
     \end{minipage} \\
     \\ 
     \hline
     $\theta{_1} = 0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/14}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/14}
     \end{minipage} \\
     \\ 
     \hline
@@ -682,22 +682,22 @@ For ARMA
     \hline
     $\theta{_1} = -0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/9}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/9}
     \end{minipage} \\
     \\ 
     \hline
     $\theta{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/12}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/12}
     \end{minipage} \\
     \\ 
     \hline
     $\theta{_1} = 0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/15}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/15}
     \end{minipage} \\
     \\ 
     \hline
@@ -717,22 +717,22 @@ For ARMA
     \hline
     $\phi{_1} = -0.1$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/16}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/16}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = -0.95$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/17}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/17}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = -0.75$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/18}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/18}
     \end{minipage} \\
     \\ 
     \hline
@@ -750,29 +750,29 @@ For ARMA
     \hline
     $\phi{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/19}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/19}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0.75$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/20}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/20}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0.95$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/21}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/21}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 1$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/22}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/22}
     \end{minipage} \\
     \\ 
     \hline
@@ -792,22 +792,22 @@ For ARMA
     \hline
     $\phi{_1} = -0.9$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/23}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/23}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/26}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/26}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0.7$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/28}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/28}
     \end{minipage} \\
     \\ 
     \hline
@@ -825,22 +825,22 @@ For ARMA
     \hline
     $\phi{_1} = -0.9$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/24}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/24}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/27}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/27}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0.7$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/30}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/30}
     \end{minipage} \\
     \\ 
     \hline
@@ -858,22 +858,22 @@ For ARMA
     \hline
     $\phi{_1} = -0.9$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/25}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/25}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/28}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/28}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0.7$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/31}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/31}
     \end{minipage} \\
     \\ 
     \hline
@@ -893,22 +893,22 @@ For ARMA
     \hline
     $\phi{_1} = -0.9$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/32}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/32}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/34}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/34}
     \end{minipage} \\
     \\ 
     \hline
     $\phi{_1} = 0.9$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/36}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/36}
     \end{minipage} \\
     \\ 
     \hline
@@ -926,22 +926,22 @@ For ARMA
     \hline
     $-0.9$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/33}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/33}
     \end{minipage} \\
     \\ 
     \hline
     $0.8$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/35}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/35}
     \end{minipage} \\
     \\ 
     \hline
     $0.9$
     &
-    \begin{minipage}{.3\textwidth}
-      \includegraphics[height=150mm]{figure/37}
+    \begin{minipage}{15cm}
+      \includegraphics[width=\linewidth, height=500mm]{figure/37}
     \end{minipage} \\
     \\ 
     \hline
