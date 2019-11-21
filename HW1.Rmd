@@ -1,0 +1,950 @@
+---
+title: "Homework Assignment 1"
+author:
+- Uppsala University
+- Department of Statistics
+- "Course: Time Series, Fall 2019"
+- "Author: Claes Kock,Yuchong Wu, Emma Gunnarsson"
+- "Date: 13/11/2019"
+header-includes:
+   - \usepackage{array}
+   - \usepackage{booktabs}
+   - \usepackage{diagbox}
+   - \usepackage{textcomp}
+   - \usepackage{float}
+output:
+  pdf_document:
+    number_sections: yes
+---
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.pos = 'H')
+```
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(reshape2)
+library(ggplot2)
+library(moments)
+```
+
+
+
+```{r}
+set.seed(931229)
+
+# Parameter values and settings
+NumObsSim     = 5000 # Simulated Sample size 
+numObsToPlot  = 500  
+ACFLagstoPlot = 20
+sigma2        = 1    # variance of noise term
+```
+
+
+\newpage
+
+# Introduction {-}
+
+We have five models to estimate. Will add more text later
+
+\newpage
+
+# Models
+
+We have five models to estimate and present:
+
+MA(1):     $$Y_t = e_t - \theta e_{t-1}$$
+
+MA(2):     $$Y_t = e_t - \theta_1 e_{t-1} - \theta_2 e_{t-2}$$
+
+AR(1):     $$Y_t = \Phi Y_{t-1} + e_t$$
+
+AR(2):     $$Y_t = \Phi_1 Y_{t-1} + \Phi_2 Y_{t-2} + e_t$$
+
+ARMA(1,1): $$Y_t = \Phi Y_{t-1} + e_t - \theta e_{t-1}$$
+
+
+
+For all the processes above, we have:
+
+$$e_t \sim NID(0, 1)$$
+
+
+# Theoretical values of models
+
+For each of the models, we need to derive and report the following theoretical properties:
+
+1. The Mean function: $$\mu = E(Y_t)$$
+2. The Variance function: $$\gamma_0 = V(Y_t)$$
+3. The First autocovariance: $$\gamma_1 = Cov(Y_t, Y_{t-1})$$
+4. The Second autocovariance: $$\gamma_2 = Cov(Y_t, Y_{t-2})$$
+5. The First Autocorrelation: $$\rho_1 = \gamma_1/\gamma_0$$
+6. The Second Autocorrelation: $$\rho_2 = \gamma_2/\gamma_0$$
+7. A general expression for the the Autocorrelation function as a function of
+the parameters of the process: $$\rho_k, k >= 1 $$
+
+The result is compiled in the following table. The exact calculations can be found in the appendix.
+
+-Table here!-
+
+\newpage
+
+## The Concept of stationarity
+A covariance stationary process is a process where the statistical properties do not change over time. More specifically, this imposes three requirements:
+1.	$E(Y_t)$ constant over time
+2.	$Var(Y_t)$ constant over time
+3.	The autocovariance depends only on the distance between two observations, and not on where in time the observations are found
+
+
+### Simulation of models
+
+Here we simulate the models to get acess to the "fingerprint" or Sample auto correlation function (SACF).
+
+\newpage
+
+# Study
+
+
+##########################
+## Study for MA(1)
+##########################
+
+A moving average process of order 1 -an MA(1) proccess- indicates a process where the output variable $Y_t$ depends linearly on current white noise as well as white noise in the previous period. More specifically, we have the model:
+
+MA(1):     $$Y_t = e_t - \theta e_{t-1}$$
+where $$e_t \sim NID(0, 1)$$
+
+$Y_t$ is an output variable, $\theta$ the parameter of the process, and $e_1$ denotes the white noise. $e_t$ is identically and independently distributed with mean 0 and a constant variance. Since it is independent, the autocovariance is 0 by definition, making any kind of predictions of $e_t$ impossible. This has indications for the properties of $Y_t$, which are discussed further in Appendix A. Here however, it is sufficient just to present the resulting formulas for the statistical properties of $Y_t$:
+
+$$E(Y_t)=0$$
+NOTE! The signs are wrong?...
+$$\gamma_0 = V(Y_t) = (1+\theta) * \sigma^2 $$
+$$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta*\sigma^2$$
+$$\gamma_2 = Cov(Y_t, Y_{t-2})= 0, $$
+$$\rho_1 = \gamma_1/\gamma_0 = \theta/(\theta^2+1)$$
+$$\rho_2 = \gamma_2/\gamma_0 = 0$$
+
+In order to have a covariance stationary MA(1) process, all three requirements for covariance stationarity must be fulfilled. Just by looking at the formula for the expected value and variance of $Y_t$, one understands that the first and second requirements indeed are fulfilled. Neither one of expressions are related to time. Moreover, to have a covariance stationary process, the autocovariances must be independent of where in the process the observations are found, and only depend on the distance between those observations. This is indeed the case, which is shown in Appendix A. As you see above, the first autocorrelation (using the lag 1) is a function of $\theta$ and $\sigma^2$, and the other covariances are simply 0. Hence, they do not depend on time, but only on the lag.
+
+We can hence conclude that an MA(1) process should be stationary no matter what the parameter is. Moreover, the first autocovariance is (positively) related to the MA(1) parameter, while the following ones are not. This has of course implications for the autocorrelations, since the autocorrelation is a function of the covariance. To get an even deeper understanding of how the MA(1) proccess behaves, we will now turn to a simulation excercise where the parameter value will be varied. Appendix B for MA(1) shows simulated plots of six MA(1) processes, using different $\theta$:s.
+
+In the table for MA(1), first row, $\theta$ is -1, hence $Y_t$ depends negatively on $e_{t-1}$. The sample variance looks constant, which aligns with theory since the true variance is $1*(1+(-1)^2)= 2$. Moreover, there is no trend in the data, but rather a choppy spread constantly around 0. The reason for this is the nature of $e_t$ as an independent, identically distributed random variable. When turning to the correlograms, they look as expected. The sample ACF has a spike statistically different from 0 at k=1 (where the true ro is (-1/((-1)^2+1)= -0.5), and is 0 otherwise. Note here that the blue dotted lines in the correlagrams are the confidence intervals at the 95%-level. Hence, any spike reaching beyond a blue line is statistically different from 0 with 95% confidence. The PACF shows the partial autocorrelation function $\rho_k$, which shows the autocorrelation using the lag k while controlling for the other k-1 lags. Hence, it is the marginal correlation of $Y_t$ and $Y_{t-k}$.
+
+In the table for MA(1) in Appendix B, the second row, $\theta$ is set to -0.45 instead. To a large extent, this realization resembles the previous one, with the difference that the variance of $Y_t$ now is smaller. One can see how the time series only moves between -3 and 3, instead of between -4 and 4 as in the previous case (note the different scales of the plots!) This makes sense, since the true variance in this case only is 1.2025.
+
+When $\theta$ is set to be 0 (in the third row), the moving average process collapses into just being white noise. Hence, we now have the model $Y_t$ = $e_t$, with mean 0 and variance $\sigma^2$. Since the autocovariance is zero, no matter what k is, so is $\rho$ and hence we see no spikes whatsoever in the sample ACF. $Y_t$ is independently distributed, which makes it not just covariance stationary but actually strict stationary.
+
+In the table for MA(1) in Appendix B, fourth row, $\theta$ is set to be positive at 0.45. As in the previous cases, the variance of $Y_t$ looks stable in the time series plot, being indicative if the true variance which in this case is constant at 1.2025. Note that the variance of $Y_t$ thus does not depend on the sign of $\theta$, since it equals the variance in the second row. Moreover, the sample value of ACF when k=1 is of the same magnitude as in row 2, but it is now positive. This also makes perfect sense, since $Y_t$ is *positively* related to $e_t$ in this case.
+
+When increasing $\theta$ further to 1 in the fith row, the true variance increses to 2 (as in row 1 where theta was -1). Moreover, the value of the ACF when k=1 is of the same magnitude as in row 1, but now it is positive.
+
+In the last row in the table for MA(1) in Appendix B, $\theta$ is increased to 2. The plots in that row and in the row above have a resemblence?
+
+In summary, all simulations of the MA(1) process, using different parameter values, generate stationary samples of data. All realizations presented here have, by visual inpsection, constant means and variances. Moreover, the autocovariances do not depend on time but only on the time lag. Finally, in all cases except for when $\theta$ is 0, we have some interdependence, making the data covariance stationary instead of strict stationary.
+
+
+
+## Study for MA(2)
+
+An MA(2) process includes not only white noise in the current and previous periods like the MA(1) process, but it also includes white noise *two* time periods back. More specifically, we have the model:
+
+MA(2):     $$Y_t = e_t - \theta_1 e_{t-1} - \theta_2 e_{t-2}$$
+
+As before, $Y_t$ is an output variable, and $e_t$ denotes the white noise. The $\theta_1$ parameter describes how the previous period is related to $Y_t$, and $\theta_2$ is the parameter describing how $e$ two periods back is related to $Y_t$. Moreover, $e_t$ is identically and independently distributed with mean 0 and a constant variance just as in the MA(1) process. Below, the statistical properties of an MA(2) process are presented. To see derivations and further discussion, please see Appendix A.
+
+$$E(Y_t)=0$$
+$$\gamma_0 = V(Y_t) = (1+\theta_1^2+\theta_2^2) * \sigma^2 $$
+$$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta_1*\sigma^2 + \theta_1*\theta_2*\sigma^2$$
+$$\gamma_2 = Cov(Y_t, Y_{t-2})= \theta_2*\sigma^2 $$
+
+$$\rho_1  = \theta_1*(\theta_2+1) /(\theta_1^2 + \theta_2^2+1)$$
+$$\rho_2 = \theta_2 / (\theta_2^2 + theta_1^2+1)$$
+
+\newpage
+
+In the following, we will discuss realizations of the the MA(2) process using different combinations of $\theta_1$ and $\theta_2$. In the table for MA(2) in Appendix B, $\theta_1$ is constant at -0.8, while $\theta_2$ is varied between three different values. In the first row, $\theta_2$ is 0, essentially creating an MA(1) process with parameter value -0.8. This becomes evident by looking at the MA(2) model and formulas above, and it is also seen in the sample, since the sample ACF only has one spike, at k=1. Moreover, the SPAC look smilar to the ones in the MA(1) processes in Table X, row 1 and 2, where $\theta_1$ was set to negative values as well.
+
+In the second row, $\theta_2$ is set to 0.7 instead, creating a full MA(2) process. Here, $Y_t$ is positively related to $e_t$ two periods back, and negatively related to $e_t$ in the previous period.  The sample variance look constant in the time series plot, which is according to theory since the true variance is constant at $1*(1+(-0.8)^2+0.7^2)= 1.4964$. Moreover, there is no trend in the data, but rather a choppy spread constantly around 0, just as in the MA(1) cases.  The sample ACF now has two spikes, at k=1 and k=2. The first spike is negative (true value -0.638), indicating the negative relationship between $Y_t$ and $e_{t-1}$. The second spike is on the other hand positive (true value 0.230), since $e_{t-2}$ is positively related to $Y_t$.
+
+In the last row, $\theta_2$ is set to 1. Essentially, it looks similar to the previous case. However the true variance becomes larger, and is now 2.64. Perhaps, it is possible (although hard) to discern in the sample, since the series in the third row looks less ”thick” close to 0; the observations are to a larger extent allocated further from the mean (please note that the scales in the different plots are the same here). The sample ACF looks as a good estimation of the true autocorrelations, as in the previous cases. The true value of the ACF when k=1 is -0.606, and when k=2 it is 0.379.
+
+In Table XXX, $\theta1$ is being held constant at 0 instead, generating the model;
+
+MA(2):	$Yt = \theta_2*e_{t-2}  + e_t$ where $e_t is IID(0, \sigma^2)$
+
+Where $\theta_2$ then is varied between 0, 0.7 and 1. When $\theta_2$ is set to 0, we once again get a white noise process. For a further discussion on white noise, please review the section discussing the third row in Table X.
+
+In the second row in Table XXX, $\theta2$ is instead set to 0.7. Here, we see only one spike in the sample ACF, at k=2, which aligns with theory. Since $\theta_1$ is 0, the true first autocorrelation becomes 0, and the second becomes -in this case- 0.329. It does look like the sample estmation is a bit bigger, but still pretty close.
+
+In the third row, $\theta_2$ is increased to 1, and basically looks as one would expect. It is very similar to when $\theta_2$ is 0.7.
+
+
+In Table XXXX, $\theta_1$ is held constant at 0.8, so that we once again have terms for both $e_{t-2}$ and $e_{t-1}$. However, when $\theta_2$ is set to 0 in the first row, the model collpases into an MA(1) process with the parameter value 0.8. The sample ACF only has one spike, at k=1, and the SPAC looks similar to the ones in the MA(1) processes where $\theta_1$ was set to 1 and 2 respectively.
+
+In the second row, we once again have a full MA(2) process, where $\theta_2$ is 0.7. Here, $Y_t$ is positively related to e both one and two periods back. The sample variance looks constant in the time series plot, which aligns with theory; a constant true variance at 2.49. The sample ACF now has two spikes, at k=1 and k=2, and naturally, both spikes are positive. The true values of the ACF are 0.638 (k=1) and 0.329 (k=2).
+
+In the third row, $\theta_2$ is set to 1 instead. As before, this process is in most aspects similar to when $\theta_2$ is somewhat smaller. 
+
+
+
+
+
+###########################
+## Study for AR(1)
+###########################
+
+
+###########################
+## Study for AR(2)
+###########################
+
+
+###########################
+## Study for ARMA(1,1)
+###########################
+
+\newpage
+
+# Conclusion
+
+\newpage
+
+# Appendix
+
+## Appendix A
+
+
+## Derivation for MA(1)
+
+### Model
+
+$$Y_{t}=e_{t}-\theta e_{t-1}$$
+
+$$e_{t} \sim I I D\left(0, \sigma^{2}\right)$$
+
+### Mean
+
+$$\begin{array}{l}{E\left(Y_{t}\right)=E\left(e_{t}-\quad \theta e_{t-1}\right)} \\ {E\left(Y_{t}\right)=E\left(e_{t}\right)-E\left(\theta e_{t-1}\right)} \\ {E\left(Y_{t}\right)=E\left(e_{t}\right)-\theta E\left(e_{t-1}\right)} \\ {E\left(Y_{t}\right)=0 \quad-\theta \times 0} \\ {E\left(Y_{t}\right)=0}\end{array}$$
+
+### Variance
+
+$$\begin{array}{l}{\operatorname{Var}\left(Y_{t}\right)=V\left(Y_{t}\right)} \\ {\operatorname{Var}\left(Y_{t}\right)=V\left(e_{t}+-\theta e_{t-1}\right)} \\ {\operatorname{Var}\left(Y_{t}\right)=V\left(e_{t}\right)+V\left(-\theta e_{t-1}\right)+2 \operatorname{Cov}\left(e_{t},-\theta e_{t-1}\right)}\\ {\operatorname{Var}\left(Y_{t}\right)=V\left(e_{t}\right)+(-\theta)^{2} V\left(\quad e_{t-1}\right)+(-\theta) 2 \operatorname{Cov}\left(e_{t}, \quad e_{t-1}\right)} \\ {\operatorname{Var}\left(Y_{t}\right)=V\left(e_{t}\right)+\quad \theta^{2} \quad V\left(\quad e_{t-1}\right)+(-\theta) 2 \times 0} \\ {\operatorname{Var}\left(Y_{t}\right)=V\left(e_{t}\right)+\quad \theta^{2} \quad V\left(\quad e_{t-1}\right)}\\ {\operatorname{Var}\left(Y_{t}\right)=V\left(e_{t}\right)+\theta^{2} V\left(e_{t}\right)} \\ {\operatorname{Var}\left(Y_{t}\right)=\sigma^{2}+\theta^{2} \sigma^{2}} \\ {\operatorname{Var}\left(Y_{t}\right)=\sigma^{2}\left(1+\theta^{2}\right)}\end{array} $$
+
+### First autocovariance
+
+$$\begin{aligned} 
+\operatorname{cov}\left(Y_{t}, Y_{t-1}\right)=& \operatorname{Cov}\left(\theta_{1} e_{t-1}+e_{t}, \quad \theta_{1} e_{t-2}+e_{t-1}\right) \\=& \operatorname{Cov}\left(\theta_{1} e_{t-1} \quad \quad, \quad \theta_{1} e_{t-2} \quad \quad \quad)\right.\\+& 
+\operatorname{Cov}\left(\theta_{1} e_{t-1} \quad \quad, \quad \quad \quad \quad \quad e_{t-1})\right.\\+& 
+\operatorname{Cov}\left(\quad \quad \quad \quad e_{t}, \quad \theta_{1} e_{t-2} \quad \quad \quad)\right.\\+& 
+\operatorname{Cov}\left(\quad \quad \quad \quad e_{t}, \quad \quad \quad \quad \quad e_{t-1}\right) \end{aligned}$$
+
+$$\begin{aligned} \operatorname{Cov}\left(Y_{t}, Y_{t-1}\right) &=\theta_{1}^{2} \operatorname{Cov}\left(e_{t-1}, e_{t-2}\right) \\ &+\theta_{1} \operatorname{Cov}\left(e_{t-1}, e_{t-1}\right) \\ &+\theta_{1} \operatorname{Cov}\left(e_{t}, e_{t-2}\right) \\ &+\quad \operatorname{Cov}\left(e_{t}, e_{t-1}\right) \end{aligned}$$
+
+$$ \begin{aligned} \operatorname{Cov}\left(Y_{t}, Y_{t-1}\right) &=\theta_{1}^{2} \times 0 \\ &+\theta_{1} \sigma^{2} \\ &+\theta_{1} \times 0 \\ &+\quad 0  \\ &=\theta_{1} \sigma^{2} \end{aligned}$$
+
+### Second autocovariance
+
+$$\begin{aligned} 
+\operatorname{cov}\left(Y_{t}, Y_{t-2}\right)=& \operatorname{Cov}\left(\theta_{1} e_{t-1}+e_{t}, \quad \theta_{1} e_{t-3}+e_{t-2}\right) \\=& \operatorname{Cov}\left(\theta_{1} e_{t-1} \quad \quad, \quad \theta_{1} e_{t-3} \quad \quad \quad)\right.\\+& 
+\operatorname{Cov}\left(\theta_{1} e_{t-1} \quad \quad, \quad \quad \quad \quad \quad e_{t-2})\right.\\+& 
+\operatorname{Cov}\left(\quad \quad \quad \quad e_{t}, \quad \theta_{1} e_{t-3} \quad \quad \quad)\right.\\+& 
+\operatorname{Cov}\left(\quad \quad \quad \quad e_{t}, \quad \quad \quad \quad \quad e_{t-2}\right) \end{aligned}$$
+
+$$\begin{aligned} \operatorname{Cov}\left(Y_{t}, Y_{t-2}\right) &=\theta_{1}^{2} \operatorname{Cov}\left(e_{t-1}, e_{t-3}\right) \\ &+
+\theta_{1} \operatorname{Cov}\left(e_{t-1}, e_{t-2}\right) \\ &+
+\theta_{1} \operatorname{Cov}\left(e_{t}, e_{t-3}\right) \\ &+
+\quad \operatorname{Cov}\left(e_{t}, e_{t-2}\right) \end{aligned}$$
+
+$$ \begin{aligned} \operatorname{Cov}\left(Y_{t}, Y_{t-1}\right) &=\theta_{1}^{2} \times 0 \\ &+\theta_{1} \times 0 \\ &+\theta_{1} \times 0 \\ &+\quad 0  \\ &=\theta_{1} \sigma^{2} \end{aligned}$$
+
+### First autocorrelation
+
+$$\begin{aligned} \gamma_{0} &= \sigma^{2}\left(1+\theta^{2}\right) \\ \gamma_{1} &= -\theta \sigma^{2} \\ \rho_{1} &= \frac{-\theta \sigma^{2}}{\sigma^{2}\left(1+\theta^{2}\right)} \\ \rho_{1} &= \frac{-\theta}{\left(1+\theta^{2}\right)}\end{aligned}$$
+
+### Second autocorrelation
+
+$$\begin{aligned} \rho_{2} &=\frac{\gamma_{2}}{\gamma_{0}} \\ \rho_{2} &=\frac{0}{\sigma^{2}\left(1+\theta^{2}\right)} \\ \rho_{2} &=0 \end{aligned}$$
+
+### General expression for the autocorrelation
+
+$$\begin{array}{c}{\gamma_{k}=0 \text { for all } k \geq 2} \\ {\rho_{k}=\frac{\gamma_{k}}{\gamma_{0}}=0 \text { for all } k \geq 2}\end{array}$$
+
+## Derivation for MA(2)
+
+### Model
+
+
+$$ Y_{t}=e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2} $$
+$$  e_{t} \sim \operatorname{llD}\left(0, \sigma^{2}\right) $$
+
+### Mean
+
+$$\begin{array}{l}{E\left(Y_{t}\right)=E\left(e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2}\right)} \\ {E\left(Y_{t}\right)=E\left(e_{t}\right)-E\left(\theta_{1} e_{t-1}\right)-E\left(\theta_{2} e_{t-2}\right)} \\ {E\left(Y_{t}\right)=E\left(e_{t}\right)-\theta_{1} E\left(e_{t-1}\right)-\theta_{2} E\left(e_{t-2}\right)} \\ {E\left(Y_{t}\right)=0-\theta_{1} \times 0-\theta_{2} \times 0} \\ {E\left(Y_{t}\right)=0}\end{array}$$
+
+### Variance
+
+$$\begin{array}{l}{\gamma_{0}=V\left(Y_{t}\right)} \\ {\gamma_{0}=V\left(e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2}\right)} \\ {\gamma_{0}=V\left(e_{t}\right)+V\left(-\theta_{1} e_{t-1}\right)+V\left(-\theta_{2} e_{t-2}\right)} \\ {\gamma_{0}=\sigma^{2}+\theta_{1}^{2} \sigma^{2}+\theta_{2}^{2} \sigma^{2}} \\ {\gamma_{0}=\sigma^{2}\left(1+\theta_{1}^{2}+\theta_{2}^{2}\right)}\end{array}$$
+
+### First autocovariance
+
+$$\begin{array}{ll}{\gamma_{1}=} & {\text { Cov }\left[Y_{t},Y_{t-1}\right]} \\ {\gamma_{1}=} & {\text { Cov } \left[\left(e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2}\right),\left(e_{t-1}-\theta_{1} e_{t-2}-\theta_{2} e_{t-3}\right)\right]}\end{array}$$
+
+So all the covariances except $\operatorname{Cov}\left(-\theta_{1} e_{t-1}\right), e_{t-1}$ and $\operatorname{Cov}\left(-\theta_{2} e_{t-2},-\theta_{1} e_{t-2}\right)$ will be zero.
+
+We have that 
+
+$$\begin{array}{c}{\operatorname{Cov}\left(-\theta_{1} e_{t-1}, e_{t-1}\right)=-\theta_{1} \sigma^{2}} \\ {\operatorname{Cov}\left(-\theta_{2} e_{t-2},-\theta_{1} e_{t-2}\right)=\theta_{1} \theta_{2} \sigma^{2}}\end{array}$$
+
+So
+
+$$\begin{array}{l}{\gamma_{1}=0+0+0-\theta_{1} \sigma^{2}+0+0+\theta_{1} \theta_{2} \sigma^{2}+0} \\ {\gamma_{1}=\sigma^{2}\left(\theta_{1} \theta_{2}-\theta_{1}\right)} \\ {\gamma_{1}=\sigma^{2} \theta_{1}\left(\theta_{2}-1\right)}\end{array} $$
+
+\newpage
+
+### Second autocovariance
+
+$${\gamma_{2}=\quad \text {Cov} \quad\left[Y_{t} \quad, Y_{t-2}\right]}$$
+$$\begin{array}{l}{Y_{t}=e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2}} \\ {Y_{t-2}=e_{t-2}-\theta_{1} e_{t-3}-\theta_{2} e_{t-4}}\end{array}$$
+
+Thus,
+
+$$\gamma_{2}= \text{Cov}[(e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2}),(e_{t-2}-\theta_{1} e_{t-3}-\theta_{2} e_{t-4})]$$
+$$\gamma_{2}=0+0+0+0+0+0+\operatorname{Cov}\left(-\theta_{2} e_{t-2}, e_{t-2}\right)+0 \ldots$$
+$$\begin{array}{l}{\gamma_{2}=0+0+0+0+0+0+\operatorname{Cov}\left(-\theta_{2} e_{t-2}, e_{t-2}\right)+0 \ldots} \\ {\gamma_{2} =-\theta_{2}Var\left(e_{t-2}, e_{t-2}\right)} \\ {\gamma_{2}=-\theta_{2} \sigma^{2}}\end{array}$$
+
+### First autocorrelation
+
+$$\rho_{k}=\frac{\gamma_{k}}{\gamma_{0}}$$
+
+$${\gamma_{1}=\sigma^{2} \theta_{1}\left(\theta_{2}-1\right)}$$
+
+$${\gamma_{0}=\sigma^{2}\left(1+\theta_{1}^{2}+\theta_{2}^{2}\right)}$$
+
+thus, the first autocorrelation is
+
+$$\rho_{1}=\frac{\gamma_{1}}{\gamma_{0}}=\frac{\theta_{1}\left(\theta_{2}-1\right)}{\left(1+\theta_{1}^{2}+\theta_{2}^{2}\right)}$$
+
+### Second autocorrelation
+
+$$\rho_{k}=\frac{\gamma_{k}}{\gamma_{0}}$$
+
+$${\gamma_{2}=-\theta_{2} \sigma^{2}}$$
+
+$${\gamma_{0}=\sigma^{2}\left(1+\theta_{1}^{2}+\theta_{2}^{2}\right)}$$
+
+
+thus, the second autocorrelation is
+
+$$\rho_{2}=\frac{\gamma_{2}}{\gamma_{0}}=\frac{-\theta_{2}}{\left(1+\theta_{1}^{2}+\theta_{2}^{2}\right)}$$
+
+
+## Derivation for AR(1)
+
+### Model
+
+$$Y_{t}=\phi_{0}+\phi_{1} Y_{t-1}+e_{t}$$
+
+Where we assume 
+
+$$\operatorname{Cov}\left(Y_{t}, e_{t}\right)=0$$
+
+and where $e_{t} \sim iid(0,1)$
+
+### Mean
+
+$$\begin{array}{l}{E\left(Y_{t}\right)=E\left(\phi_{0}+\phi_{1} Y_{t-1}+e_{t}\right)} \\ {E\left(Y_{t}\right)=\phi_{0}+\phi_{1} E\left(Y_{t-1}\right)+E\left(e_{t}\right)}\end{array}$$
+
+Note that under covariance stationarity, we have the following:
+
+$$E\left(Y_{t-1}\right)=E\left(Y_{t}\right)$$
+
+thus, 
+
+$$\begin{aligned} E\left(Y_{t}\right) &=\phi_{0}+\phi_{1} E\left(Y_{t}\right)+0 \\ E\left(Y_{t}\right)-\phi_{1} E\left(Y_{t}\right) &=\phi_{0} \\ E\left(Y_{t}\right)\left(1-\phi_{1}\right) &=\phi_{0} \\ E\left(Y_{t}\right) &=\frac{\phi_{0}}{\left(1-\phi_{1}\right)} \end{aligned}$$
+
+### Variance
+
+$$\begin{array}{l}{\gamma_{0}=Var\left(\phi_{1} Y_{t-1}+e_{t}\right)} \\ {\gamma_{0}=Var\left(\phi_{1} Y_{t-1}\right)+Var\left(e_{t}\right)+2 \operatorname{Cov}\left(\phi_{1} Y_{t-1}, e_{t}\right)} \\ {\gamma_{0}=\phi_{1}^{2} Var\left(Y_{t-1}\right)+Var\left(e_{t}\right)+2 \phi_{1} \operatorname{Cov}\left( Y_{t-1}, e_{t}\right)} \\ {\gamma_{0}=\phi_{1}^{2} Var\left(Y_{t}\right)+\sigma^{2}+2 \phi_{1} \times 0} \\ {\gamma_{0}=\phi_{1}^{2}\gamma_{0}+\sigma^{2}}\end{array}$$
+
+
+### First autocovariance
+
+$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-1}) + Cov(e_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-1}\right) + 0} \\ {\gamma_{1}=\phi Cov(Y_{t-1},Y_{t-1})} \\ {\gamma_{1}=\phi Cov(Y_{t},Y_{t-0})} \end{array}$$
+
+$${Cov(Y_{t},Y_{t-0}) = Var(Y_{t-0}) = \gamma_{0}}$$
+
+thus we have
+
+$$\gamma_{1}=\phi \gamma_{0}$$
+
+### Second autocovariance
+
+$$\begin{array}{l}{\gamma_{2}=Cov\left(Y_{t},Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi Y_{t-1},Y_{t-2}\right) = 0} \\ {\gamma_{2}=\phi Cov\left(Y_{t-1},Y_{t-2}\right)} \\ {\gamma_{2}=\phi Cov\left(Y_{t},Y_{t-1}\right)}\end{array}$$
+
+$${Cov(Y_{t},Y_{t-1}) = Var(Y_{t-1}) = \gamma_{1}}$$
+
+thus we have
+
+$$\gamma_{2}=\phi \gamma_{1}$$
+
+### First autocorrelation
+
+$$\rho_{k}=\phi^k$$
+
+thus we have
+
+$$\rho_{1}=\phi^1=\phi$$
+
+### Second autocorrelation
+
+$$\rho_{k}=\phi^k$$
+
+thus we have
+
+$$\rho_{2}=\phi^2$$
+
+## Derivation for AR(2)
+
+### Model
+
+$$Y_{t}=\phi_{0}+\phi_{1} Y_{t-1}+\phi_{2} Y_{t-2}+e_{t}$$
+
+Where we assume 
+
+$$\operatorname{Cov}\left(Y_{t-1}, e_{t}\right)=0$$
+
+and
+
+
+$$\operatorname{Cov}\left(Y_{t-2}, e_{t}\right)=0$$
+
+and where $e_{t} \sim iid(0,1)$
+
+### Mean
+
+$$\begin{array}{l}{E\left(Y_{t}\right)=E\left(\phi_{0}+\phi_{1} Y_{t-1}+\phi_{1} Y_{t-2}+e_{t}\right)} \\ {E\left(Y_{t}\right)=\phi_{0}+\phi_{1} E\left(Y_{t-1}\right)+\phi_{2} E(Y_{t-2})+E\left(e_{t}\right)}\\ E\left(Y_{t}\right)=\phi_{0}+\phi_{1} E\left(Y_{t-1}\right)+\phi_{2} E(Y_{t-2}) \end{array}$$
+
+then we assume stationarity
+
+$$\begin{array}{l}{E\left(Y_{t}\right)-\phi_{1} E\left(Y_{t}\right)+\phi_{2} E(Y_{t}) = \phi_{0}} \\
+{E\left(Y_{t}\right)(1-\phi_{1} -\phi_{2}) = \phi_{0}} \end{array}$$
+
+thus
+
+$$\begin{array}{l}{E\left(Y_{t}\right)=\phi_{0}/(1 - \phi_{1}- \phi_{2})} \end{array}$$
+
+### Variance
+
+$$\begin{array}{l}{\gamma_{0}=Cov\left(Y_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)} \\ + {Cov\left(Y_{t}, e_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+{Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}+\sigma^2\\{\gamma_{0}=\phi_{1}Cov\left(Y_{t-1}, Y_{t}\right)}+{\phi_{2}Cov\left( Y_{t-2}, Y_{t}\right)}+\sigma^2\\ {\gamma_{0}=\phi_{1} \gamma_{-1}+\phi_{2}\gamma_{-2}+\sigma^2}\end{array}$$
+
+### First autocovariance
+
+$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-1}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)}\\ + {Cov\left(e_{t}, Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-1}\right)} \\ + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-1}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{-1}\end{array}$$
+
+### Second autocovariance
+
+$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-2}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-2}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-2}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-2}\right)}\\ + {Cov\left(e_{t}, Y_{t-2}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-2}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-2}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-2}\right)} \\ + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-2}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{1}+\phi_{2}\gamma_{0}\end{array}$$
+
+### First autocorrelation
+
+$$\rho_{k}=\phi_{1}(\gamma_{k-1}/\gamma_{0})+\phi_{2}(\gamma_{k-2}/\gamma_{0}) $$
+
+which is
+
+$$\rho_{k}=\phi_{1}\rho_{k-1}+\phi_{2}\rho_{k-2} $$
+
+Correlations are symmetrical, so
+
+$$\rho_{k}=\phi_{1}\rho_{1}+\phi_{2}\rho_{2}$$
+
+$$\rho_{2}=\phi_{1}\rho_{0}+\phi_{0}\rho_{1}$$
+
+meaning that
+
+$$\rho_{1}=(\phi_{1}/(1-\phi_{2}))\rho_{0}$$
+
+$$\rho_{0} = \gamma_{0}/\gamma_{0} = 1$$
+
+so the first autocorrelation is
+
+$$\rho_{1}=(\phi_{1}/(1-\phi_{2}))$$
+
+### Second autocorrelation
+
+$$\rho_{k}=\phi_{1}(\gamma_{k-1}/\gamma_{0})+\phi_{2}(\gamma_{k-2}/\gamma_{0}) $$
+
+which is
+
+$$\rho_{k}=\phi_{1}\rho_{k-1}+\phi_{2}\rho_{k-2} $$
+
+Correlations are symmetrical, so
+
+$$\rho_{k}=\phi_{1}\rho_{1}+\phi_{2}\rho_{2}$$
+
+thus
+
+$$\rho_{1}=\phi_{1}\rho_{1}+\phi_{2}\rho_{0}$$
+
+meaning that
+
+$$\rho_{1}=\phi_{1}\rho_{1}+\phi_{2}$$
+since
+
+$$\rho_{0} = \gamma_{0}/\gamma_{0} = 1$$
+
+so the second autocorrelation is
+
+$$\rho_{2}=\phi_{1}(\phi_{1}/(1-\phi_{2}))+\phi_{2}$$
+
+which is the same as
+
+$$\rho_{2}=\phi^2_{1}/(1-\phi_{2}))+\phi_{2}$$
+we convert them to one numenator and get
+
+$$\rho_{2}=\phi^2_{1}+\phi_{2}(1-\phi_{2})/(1-\phi_{2})$$
+
+MA(1), $\theta = 1$, table 1, appendix B
+
+
+## Derivation for ARMA(1,1)
+
+We merge AR with MA to get ARMA
+
+AR-part: $\phi(B)Y_{t}$
+
+MA-part: $\phi(B)Y_{t}$
+
+ARMA-model: $\phi(B)Y_{t}$ = $\phi(B)Y_{t}$
+
+For ARMA
+
+### Mean
+
+### Variance
+
+### First autocovariance
+
+### Second autocovariance
+
+### First correlation
+
+### Second correlation
+
+\newpage
+
+## Appendix B
+
+### Models - MA(1)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\theta{_1}$}{$\theta{_2}$} & $\theta{_2} = 0$ \\ 
+    \hline
+    $\theta{_1} = -1.0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/1}
+    \end{minipage} \\
+    \hline
+    $\theta{_1} = -0.45$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/2}
+    \end{minipage} \\
+    \hline
+    $\theta{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/3}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of MA(1) - (1 of 2)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\theta{_1}$}{$\theta{_2}$} & $\theta{_2} = 0$ \\
+    \hline
+    $\theta{_1}= 0.45$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/4}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\theta{_1} = 1$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/5}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\theta{_1} = 2$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/6}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of MA(1) - (2 of 2)}
+\end{table}
+
+\newpage
+
+
+### Models - MA(2)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\theta{_1}$}{$\theta{_2}$} & $\theta{_2} = 0$ \\
+    \hline
+    $\theta{_1} = -0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/7}
+    \end{minipage} \\
+    \hline
+    $\theta{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/10}
+    \end{minipage} \\
+    \hline
+    $\theta{_1} = 0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/13}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of MA(2) - (1 of 3)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\theta{_1}$}{$\theta{_2}$} & $\theta{_2} = 0.7$ \\
+    \hline
+    $\theta{_1} = -0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/8}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\theta{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/11}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\theta{_1} = 0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/14}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of MA(2) - (2 of 3)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\theta{_1}$}{$\theta{_2}$} & $\theta{_2} = 1$ \\ 
+    \hline
+    $\theta{_1} = -0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/9}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\theta{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/12}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\theta{_1} = 0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/15}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of MA(2) - (3 of 3)}
+\end{table}
+
+\newpage
+
+### Models - AR(1)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\phi{_1}$}{$\phi{_2}$} & $\phi{_2} = 0$ \\ 
+    \hline
+    $\phi{_1} = -0.1$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/16}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = -0.95$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/17}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = -0.75$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/18}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of AR(1) - (1 of 2)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\phi{_1}$}{$\phi{_2}$} & $\phi{_2} = 0$ \\ 
+    \hline
+    $\phi{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/19}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0.75$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/20}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0.95$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/21}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 1$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/22}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of AR(1) - (2 of 2)}
+\end{table}
+
+\newpage
+
+### Models - AR(2)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\phi{_1}$}{$\phi{_2}$} & $\phi{_2} = 0.1$ \\ 
+    \hline
+    $\phi{_1} = -0.9$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/23}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/26}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0.7$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/28}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of AR(1) - (1 of 3)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\phi{_1}$}{$\phi{_2}$} & $\phi{_2} = 0.2$ \\ 
+    \hline
+    $\phi{_1} = -0.9$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/24}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/27}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0.7$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/30}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of AR(1) - (2 of 3)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\phi{_1}$}{$\phi{_2}$} & $\phi{_2} = 0.8$ \\ 
+    \hline
+    $\phi{_1} = -0.9$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/25}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/28}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0.7$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/31}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of AR(1) - (3 of 3)}
+\end{table}
+
+\newpage
+
+### Models - ARMA(1,1)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\phi$}{$\theta$} & $\theta = -0.4$ \\ 
+    \hline
+    $\phi{_1} = -0.9$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/32}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/34}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $\phi{_1} = 0.9$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/36}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of ARMA(1,1) - (1 of 2)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | l | c | }
+    \hline
+    \diagbox[]{$\phi$}{$\theta$} & $0.4$ \\ 
+    \hline
+    $-0.9$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/33}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $0.8$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/35}
+    \end{minipage} \\
+    \\ 
+    \hline
+    $0.9$
+    &
+    \begin{minipage}{.3\textwidth}
+      \includegraphics[height=150mm]{figure/37}
+    \end{minipage} \\
+    \\ 
+    \hline
+  \end{tabular}
+  \caption{Table of ARMA(1,1) - (2 of 2)}
+\end{table}
