@@ -311,7 +311,7 @@ $$\begin{array}{l}{\gamma_{1}=0+0+0-\theta_{1} \sigma^{2}+0+0+\theta_{1} \theta_
 ### Second autocovariance
 
 $${\gamma_{2}=\quad \text {Cov} \quad\left[Y_{t} \quad, Y_{t-2}\right]}$$
-$$\begin{array}{l}{Y_{t}=e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2}} \\ {Y_{t-2}=e_{t-2}-\theta_{1} e_{t-3}-\theta_{2} e_{t-4}}\end{array}$$
+$$\begin{align}Y_{t} &= e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2} \\ Y_{t-2} &= e_{t-2}-\theta_{1} e_{t-3}-\theta_{2} e_{t-4} \end{align}$$
 
 Thus,
 
@@ -515,17 +515,33 @@ MA(1), $\theta = 1$, table 1, appendix B
 
 ## Derivation for ARMA(1,1)
 
-We merge AR with MA to get ARMA
+ARMA(1,1): $$Y_t = \Phi Y_{t-1} + e_t - \theta e_{t-1}$$
 
-AR-part: $\phi(B)Y_{t}$
-
-MA-part: $\phi(B)Y_{t}$
-
-ARMA-model: $\phi(B)Y_{t}$ = $\phi(B)Y_{t}$
-
-For ARMA
+$$e_t \sim NID(0, 1)$$
 
 ### Mean
+
+Note that:
+
+$$ \begin{align}\phi(B) Y_{t} &= \theta(B) e_{t} \\ [\phi(B)]^{1} Y_{t} &= \theta(B) e_{t} \\ Y_{t} &= [\phi(B)]^{-1} \theta(B) e_{t} \end{align}$$
+
+That is:
+
+$$Y_{t}=\frac{\theta(B)}{\phi(B)} e_{t}$$
+
+Let:
+
+$$ \frac{\theta(B)}{\phi(B)}=\Sigma_{j=0}^{\infty} \psi_{j} B^{j} $$
+
+where $\phi_j$ would be a function of the "original parameters", that is:
+
+$$\psi_{j}=f(\theta, \phi)$$
+
+Thus:
+
+$$ \begin{array}{l}{Y_{t}=\left[\frac{\theta(B)}{\phi(B)}\right] e_{t}} \\ {Y_{t}=\left[\Sigma_{j=0}^{\infty} \psi_{j} B^{j}\right] e_{t}} \\ {Y_{t}=\psi_{0} B^{0} e_{t}+\psi_{1} B^{1} e_{t}+\psi_{2} B^{2} e_{t}+\psi_{3} B^{3} e_{t}+\psi_{4} B^{4} e_{t}+\ldots} \\ {Y_{t}=\psi_{0} e_{t-0}+\psi_{1} e_{t-1}+\psi_{2} e_{t-2}+\psi_{3} e_{t-3}+\psi_{4} e_{t-4}+\ldots}\end{array} $$
+
+Thus:
 
 ### Variance
 
