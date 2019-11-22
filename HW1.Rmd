@@ -119,33 +119,38 @@ Here we simulate the models to get acess to the "fingerprint" or Sample auto cor
 A moving average process of order 1 -an MA(1) proccess- indicates a process where the output variable $Y_t$ depends linearly on current white noise as well as white noise in the previous period. More specifically, we have the model:
 
 MA(1):     $$Y_t = e_t - \theta e_{t-1}$$
-where $$e_t \sim NID(0, 1)$$
+where $e_t \sim NID(0, 1)$
 
 $Y_t$ is an output variable, $\theta$ the parameter of the process, and $e_1$ denotes the white noise. $e_t$ is identically and independently distributed with mean 0 and a constant variance. Since it is independent, the autocovariance is 0 by definition, making any kind of predictions of $e_t$ impossible. This has indications for the properties of $Y_t$, which are discussed further in Appendix A. Here however, it is sufficient just to present the resulting formulas for the statistical properties of $Y_t$:
 
-$$E(Y_t)=0$$
-NOTE! The signs are wrong?...
-$$\gamma_0 = V(Y_t) = (1+\theta) * \sigma^2 $$
-$$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta*\sigma^2$$
-$$\gamma_2 = Cov(Y_t, Y_{t-2})= 0, $$
-$$\rho_1 = \gamma_1/\gamma_0 = \theta/(\theta^2+1)$$
-$$\rho_2 = \gamma_2/\gamma_0 = 0$$
+$E(Y_t)=0$
+$\gamma_0 = V(Y_t) = (1+\theta) * \sigma^2$
+$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta*\sigma^2$
+$\gamma_2 = Cov(Y_t, Y_{t-2})= 0$
+$\rho_1 = \gamma_1/\gamma_0 = \theta/(\theta^2+1)$
+$\rho_2 = \gamma_2/\gamma_0 = 0$
 
-In order to have a covariance stationary MA(1) process, all three requirements for covariance stationarity must be fulfilled. Just by looking at the formula for the expected value and variance of $Y_t$, one understands that the first and second requirements indeed are fulfilled. Neither one of expressions are related to time. Moreover, to have a covariance stationary process, the autocovariances must be independent of where in the process the observations are found, and only depend on the distance between those observations. This is indeed the case, which is shown in Appendix A. As you see above, the first autocorrelation (using the lag 1) is a function of $\theta$ and $\sigma^2$, and the other covariances are simply 0. Hence, they do not depend on time, but only on the lag.
+In order to have a covariance stationary MA(1) process, all three requirements for covariance stationarity must be fulfilled. Just by looking at the formula for the expected value and variance of $Y_t$, one understands that the first and second requirements indeed are fulfilled. Neither one of expressions are related to time. Moreover, to have a covariance stationary process, the autocovariances must be independent of where in the process the observations are found, and only depend on the distance between those observations. This is indeed the case, which is shown in Appendix A. As you see above, the first autocorrelation (using the lag 1) is a function of $\theta$ and $\sigma^2$, and the other covariances are simply 0. Hence, they do not depend on time, but only on the distance.
 
-We can hence conclude that an MA(1) process should be stationary no matter what the parameter is. Moreover, the first autocovariance is (positively) related to the MA(1) parameter, while the following ones are not. This has of course implications for the autocorrelations, since the autocorrelation is a function of the covariance. To get an even deeper understanding of how the MA(1) proccess behaves, we will now turn to a simulation excercise where the parameter value will be varied. Appendix B for MA(1) shows simulated plots of six MA(1) processes, using different $\theta$:s.
+We can hence conclude that an MA(1) process should be stationary no matter what the parameter is, as long as it is finite. Moreover, the first autocovariance is (positively) related to the MA(1) parameter, while the following ones are not. This has of course implications for the autocorrelations, since the autocorrelation is a function of the covariance. We expect a spike in the ACF at k=1, and 0 thereafter. Moreover, the PACF shows the partial autocorrelation function, which shows the autocorrelation using the lag k while controlling for the other k-1 lags. Hence, it is the marginal correlation of $Y_t$ and $Y_{t-k}$. We expect a geometrically decreasing PACF for an MA(1) process. Note here that the blue dotted lines in the correlagrams are the confidence intervals at the 95%-level. Hence, any spike reaching beyond a blue line is statistically different from 0 with 95% confidence.  
 
-In the table for MA(1), first row, $\theta$ is -1, hence $Y_t$ depends negatively on $e_{t-1}$. The sample variance looks constant, which aligns with theory since the true variance is $1*(1+(-1)^2)= 2$. Moreover, there is no trend in the data, but rather a choppy spread constantly around 0. The reason for this is the nature of $e_t$ as an independent, identically distributed random variable. When turning to the correlograms, they look as expected. The sample ACF has a spike statistically different from 0 at k=1 (where the true ro is (-1/((-1)^2+1)= -0.5), and is 0 otherwise. Note here that the blue dotted lines in the correlagrams are the confidence intervals at the 95%-level. Hence, any spike reaching beyond a blue line is statistically different from 0 with 95% confidence. The PACF shows the partial autocorrelation function $\rho_k$, which shows the autocorrelation using the lag k while controlling for the other k-1 lags. Hence, it is the marginal correlation of $Y_t$ and $Y_{t-k}$.
+To get an even deeper understanding of how the MA(1) proccess behaves, we will now turn to a simulation excercise where the parameter value will be varied. All simulation plots can be found in the Appendix B. We move through our tables from top to bottom, following the values of their parameters. We will be looking at each table at a time, with the following structure:
+Table X(variable = y,z,x), meaning the first model has a variable value of y, second model z, etc.
 
-In the table for MA(1) in Appendix B, the second row, $\theta$ is set to -0.45 instead. To a large extent, this realization resembles the previous one, with the difference that the variance of $Y_t$ now is smaller. One can see how the time series only moves between -3 and 3, instead of between -4 and 4 as in the previous case (note the different scales of the plots!) This makes sense, since the true variance in this case only is 1.2025.
+Table 1($\theta=-1,-0.45,0$)
+When $\theta=-1$, $Y_t$ depends negatively on $e_{t-1}$. The sample variance of the plot looks constant, which aligns with theory since the true variance is $1*(1+(-1)^2)= 2$. Moreover, there is no trend in our data, but rather a choppy spread centered around 0. The reason for this is the nature of $e_t$ as an independent, identically distributed random variable. When turning to the correlograms, they look as expected. The sample ACF has a spike statistically different from 0 at k=1 (where the true 
+$\rho = (-1/((-1)^2+1)= -0.5)$, and is 0 otherwise. The sample PACF looks geometrically decreasing, which is what we expect.
 
-When $\theta$ is set to be 0 (in the third row), the moving average process collapses into just being white noise. Hence, we now have the model $Y_t$ = $e_t$, with mean 0 and variance $\sigma^2$. Since the autocovariance is zero, no matter what k is, so is $\rho$ and hence we see no spikes whatsoever in the sample ACF. $Y_t$ is independently distributed, which makes it not just covariance stationary but actually strict stationary.
+When $\theta$ =-0.45, the model resembles the previous one, to a large degree. The major difference is that the variance of $Y_t$ now is smaller. One can see how the time series only moves between -3 and 3, instead of between -4 and 4 as in the previous case (note the different scales of the plots!) This makes sense, since the true variance in this case only is 1.2025. ACF looks like what we expect (true value -0.372 when k=1) and the PACF seems to be declining like we expect as well.
 
-In the table for MA(1) in Appendix B, fourth row, $\theta$ is set to be positive at 0.45. As in the previous cases, the variance of $Y_t$ looks stable in the time series plot, being indicative if the true variance which in this case is constant at 1.2025. Note that the variance of $Y_t$ thus does not depend on the sign of $\theta$, since it equals the variance in the second row. Moreover, the sample value of ACF when k=1 is of the same magnitude as in row 2, but it is now positive. This also makes perfect sense, since $Y_t$ is *positively* related to $e_t$ in this case.
+When $\theta=0$, the moving average process collapses into just being white noise. Hence, we now have the model $Y_t$ = $e_t$, with mean 0 and variance $\sigma^2$. Since the autocovariance is zero, so no matter what k is, $\rho=0$ and hence we see no spikes whatsoever in the sample ACF. $Y_t$ is *independently* distributed, which makes it not just covariance stationary but actually strict stationary.
 
-When increasing $\theta$ further to 1 in the fith row, the true variance increses to 2 (as in row 1 where theta was -1). Moreover, the value of the ACF when k=1 is of the same magnitude as in row 1, but now it is positive.
+Table 2($\theta=0.45,1,2$)
+Here, $\theta$ is set to be *positive*, beginning at 0.45. Still, there is no evident trend in our data, but rather a choppy spread centered around 0. As in the previous cases, the variance of $Y_t$ looks stable in the time series plot, being indicative of the true variance which in this case is constant at 1.2025. Note that the variance of $Y_t$ thus does not depend on the sign of $\theta$, since it equals the variance in the second row. Moreover, the sample value of ACF when k=1 is of the same magnitude as in row 2, but it is now positive. This also makes perfect sense, since $Y_t$ is *positively* related to $e_t$ in this case.
 
-In the last row in the table for MA(1) in Appendix B, $\theta$ is increased to 2. The plots in that row and in the row above have a resemblence?
+When increasing $\theta$ further to 1, the true variance increases to 2 (as in Table 1, $\theta=-1$). Moreover, the value of the ACF when k=1 is of the same magnitude as then, but now it is positive instead of negative. ACF and PACF both look correct. The plot is quite choppy, with a big ravine in the middle.
+
+In the last row in Table 2, $\theta$ is increased to 2. This model is very similar to the previous one. The sample ACF and PACF both ressemble the previous ones. Hence, we have *doubled* $\theta$, but we see no great changes in the simulation. 
 
 In summary, all simulations of the MA(1) process, using different parameter values, generate stationary samples of data. All realizations presented here have, by visual inpsection, constant means and variances. Moreover, the autocovariances do not depend on time but only on the time lag. Finally, in all cases except for when $\theta$ is 0, we have some interdependence, making the data covariance stationary instead of strict stationary.
 
@@ -156,59 +161,110 @@ In summary, all simulations of the MA(1) process, using different parameter valu
 An MA(2) process includes not only white noise in the current and previous periods like the MA(1) process, but it also includes white noise *two* time periods back. More specifically, we have the model:
 
 MA(2):     $$Y_t = e_t - \theta_1 e_{t-1} - \theta_2 e_{t-2}$$
+where $$e_t \sim NID(0, 1)$$
 
 As before, $Y_t$ is an output variable, and $e_t$ denotes the white noise. The $\theta_1$ parameter describes how the previous period is related to $Y_t$, and $\theta_2$ is the parameter describing how $e$ two periods back is related to $Y_t$. Moreover, $e_t$ is identically and independently distributed with mean 0 and a constant variance just as in the MA(1) process. Below, the statistical properties of an MA(2) process are presented. To see derivations and further discussion, please see Appendix A.
 
-$$E(Y_t)=0$$
-$$\gamma_0 = V(Y_t) = (1+\theta_1^2+\theta_2^2) * \sigma^2 $$
-$$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta_1*\sigma^2 + \theta_1*\theta_2*\sigma^2$$
-$$\gamma_2 = Cov(Y_t, Y_{t-2})= \theta_2*\sigma^2 $$
-
-$$\rho_1  = \theta_1*(\theta_2+1) /(\theta_1^2 + \theta_2^2+1)$$
-$$\rho_2 = \theta_2 / (\theta_2^2 + theta_1^2+1)$$
+$E(Y_t)=0$
+$\gamma_0 = V(Y_t) = (1+\theta_1^2+\theta_2^2) * \sigma^2$
+$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta_1*\sigma^2 + \theta_1*\theta_2*\sigma^2$
+$\gamma_2 = Cov(Y_t, Y_{t-2})= \theta_2*\sigma^2$
+$\rho_1  = \theta_1*(\theta_2+1) /(\theta_1^2 + \theta_2^2+1)$
+$\rho_2 = \theta_2 / (\theta_2^2 + theta_1^2+1)$
 
 \newpage
 
-In the following, we will discuss realizations of the the MA(2) process using different combinations of $\theta_1$ and $\theta_2$. In the table for MA(2) in Appendix B, $\theta_1$ is constant at -0.8, while $\theta_2$ is varied between three different values. In the first row, $\theta_2$ is 0, essentially creating an MA(1) process with parameter value -0.8. This becomes evident by looking at the MA(2) model and formulas above, and it is also seen in the sample, since the sample ACF only has one spike, at k=1. Moreover, the SPAC look smilar to the ones in the MA(1) processes in Table X, row 1 and 2, where $\theta_1$ was set to negative values as well.
+In conclusion, an MA(2) process should be stationary no matter what the parameters are, as long as they are finite. When it comes to the ACF, we expect spikes at k=1 and at k=2, but not thereafter, since the autocovariances for k>2 are equal to 0. Also, we expect a geometrically decreasing PACF.
 
-In the second row, $\theta_2$ is set to 0.7 instead, creating a full MA(2) process. Here, $Y_t$ is positively related to $e_t$ two periods back, and negatively related to $e_t$ in the previous period.  The sample variance look constant in the time series plot, which is according to theory since the true variance is constant at $1*(1+(-0.8)^2+0.7^2)= 1.4964$. Moreover, there is no trend in the data, but rather a choppy spread constantly around 0, just as in the MA(1) cases.  The sample ACF now has two spikes, at k=1 and k=2. The first spike is negative (true value -0.638), indicating the negative relationship between $Y_t$ and $e_{t-1}$. The second spike is on the other hand positive (true value 0.230), since $e_{t-2}$ is positively related to $Y_t$.
-
-In the last row, $\theta_2$ is set to 1. Essentially, it looks similar to the previous case. However the true variance becomes larger, and is now 2.64. Perhaps, it is possible (although hard) to discern in the sample, since the series in the third row looks less ”thick” close to 0; the observations are to a larger extent allocated further from the mean (please note that the scales in the different plots are the same here). The sample ACF looks as a good estimation of the true autocorrelations, as in the previous cases. The true value of the ACF when k=1 is -0.606, and when k=2 it is 0.379.
-
-In Table XXX, $\theta1$ is being held constant at 0 instead, generating the model;
-
-MA(2):	$Yt = \theta_2*e_{t-2}  + e_t$ where $e_t is IID(0, \sigma^2)$
-
-Where $\theta_2$ then is varied between 0, 0.7 and 1. When $\theta_2$ is set to 0, we once again get a white noise process. For a further discussion on white noise, please review the section discussing the third row in Table X.
-
-In the second row in Table XXX, $\theta2$ is instead set to 0.7. Here, we see only one spike in the sample ACF, at k=2, which aligns with theory. Since $\theta_1$ is 0, the true first autocorrelation becomes 0, and the second becomes -in this case- 0.329. It does look like the sample estmation is a bit bigger, but still pretty close.
-
-In the third row, $\theta_2$ is increased to 1, and basically looks as one would expect. It is very similar to when $\theta_2$ is 0.7.
-
-
-In Table XXXX, $\theta_1$ is held constant at 0.8, so that we once again have terms for both $e_{t-2}$ and $e_{t-1}$. However, when $\theta_2$ is set to 0 in the first row, the model collpases into an MA(1) process with the parameter value 0.8. The sample ACF only has one spike, at k=1, and the SPAC looks similar to the ones in the MA(1) processes where $\theta_1$ was set to 1 and 2 respectively.
-
-In the second row, we once again have a full MA(2) process, where $\theta_2$ is 0.7. Here, $Y_t$ is positively related to e both one and two periods back. The sample variance looks constant in the time series plot, which aligns with theory; a constant true variance at 2.49. The sample ACF now has two spikes, at k=1 and k=2, and naturally, both spikes are positive. The true values of the ACF are 0.638 (k=1) and 0.329 (k=2).
-
-In the third row, $\theta_2$ is set to 1 instead. As before, this process is in most aspects similar to when $\theta_2$ is somewhat smaller. 
+In the following, we will discuss simulations of the the MA(2) process using different combinations of $\theta_1$ and $\theta_2$. The section follows this structure: Table X($\theta_{2}$). $\theta_{1}$ is set to the values, -0.8, 0 and 0.8 in that order.
 
 
 
+Table 3($\theta_{2}=0$)
+In Table 3,  since $\theta_{2}=0$, the MA(2) process essentially collapses into  MA(1) processes or simply white noise, depending on what $\theta_1$ is.
+
+In the first cell $\theta_1=-0.8$, creating an MA(1) process with the parameter value -0.8. The fact that this really is an MA(1) process is evident in the sample, since the sample ACF only has one spike, at k=1. Moreover, the PACF looks similar to the one in the MA(1) processes where $\theta$ was set to negative values in Table 1.
+
+When $\theta_1=0$, we once again get a white noise process. For a further discussion on white noise, please review the section discussing the MA(1) process where $\theta=0$ in Table 1. We can see similarities in ACF and PACF with this process, as we have no significant spikes, and a non-geometrical change in PACF.
+
+When $\theta_{1}=0.8$, we get an MA(1) process with the parameter value 0.8. The sample ACF only has one spike, at k=1, and the PACF looks similar to the ones in the MA(1) processes where $\theta$ was set to 1 and 2 respectively. The time series looks fairly centered, however it is somewhat spread in some places.
 
 
-###########################
+
+Table 4($\theta_{2}=0.7$)
+In Table 4, $\theta_2=0.7$, creating a full MA(2) process, with terms for the white noise in the current and past white noise, as well as the white noise two periods back.
+
+When $\theta_1=-0.8$ and $\theta_2=0.7$, $Y_t$ is positively related to $e_t$ two periods back, and negatively related to $e_t$ in the previous period.  The sample variance look constant in the time series plot, which is according to theory since the true variance is constant at $1*(1+(-0.8)^2+0.7^2)= 1.4964$. Moreover, there is no trend in the data, but rather a choppy spread constantly around 0, just as in the MA(1) cases.  The sample ACF now has two spikes, at k=1 and k=2. The first spike is negative (true value -0.638), indicating the negative relationship between $Y_t$ and $e_{t-1}$. The second spike is on the other hand positive (true value 0.230), since $e_{t-2}$ is positively related to $Y_t$.
+
+When $\theta{_1}=0$, and $\theta{_2}=0.7$, the model becomes:
+
+MA(2):	$$Y_t = 0.7*e_{t-2}  + e_t$$
+where $e_t \sim NID(0, 1)$
+
+We see only one spike in the sample ACF, at k=2, which aligns with theory. Since $\theta_1=0$, the true first autocorrelation becomes 0, and the second becomes -in this case- 0.329. The sample PACF is still geometrically decreasing. It does look like the sample estmation is a bit bigger, but still pretty close.
+
+When $\theta{_1}=0.8$, and $\theta{_2}=0.7$, $Y_t$ is positively related to e both one and two periods back. The sample variance looks constant in the time series plot, which aligns with theory; a constant true variance at 2.49. The sample ACF now has two spikes, at k=1 and k=2, and naturally, both spikes are positive. The true values of the ACF are 0.638 (k=1) and 0.329 (k=2).
+
+
+Table 5($\theta_{2}=1$)
+In Table 5,  $\theta_2=1$. Compared to before, 
+
+When $\theta{_1}=-0.8$, and $\theta{_2}=1$, $Y_t$ is negatively related to e one period back and positively realted to e two periods back. The variance looks constant in the time series plot, which makes sense since the true variance is constant at 2.64. The sample ACF looks as a good estimation of the true autocorrelations, as in the previous cases. The true value of the ACF when k=1 is -0.606, and when k=2 it is 0.379. The PACF is geometrically decreasing, as expected.
+
+When $\theta{_1}=0$. and $\theta_2=1$, we get the model
+MA(2):	$$Y_t = e_{t-2}  + e_t$$
+where $e_t \sim NID(0, 1)$
+
+As was the case in Table 4 when $\theta{_1}=0$, there is only one spike in the sample ACF, at k=2. The sample PACF is geometrically decreasing, also as expected.
+
+When $\theta{_1}=0.8$, and $\theta_2=1$ the process is in most aspects similar to when $\theta_2$ is somewhat smaller.
+
+
 ## Study for AR(1)
-###########################
 
+For the Autoregressive model, we first use only one variable, $\phi_1$, and set $\phi_2 = 0$ for this model. We have two models containing a total of 7 cells. Thus we have seven different values of $\phi_1$.
 
-###########################
+We use the following model: $Y_{t}=\phi_{0}+\phi_{1} Y_{t-1}+e_{t}$.
+
+Where we assume $\operatorname{Cov}\left(Y_{t}, e_{t}\right)=0$, and where $e_{t} \sim iid(0,1)$
+
+Statistical properties:
+$$E(Y_t)=0 \\ \gamma_0=\sigma^2/(1-\Phi^2) \\ \gamma_1= \phi*\sigma^2 / (1-\phi^2) \\ \gamma_2= \phi^2*\sigma^2 / (1-\phi^2) \\ \rho_1= \phi \\ \rho_2= \phi^2$$
+
+We expect ACF to decline geometrically and PACF to only have one value at K=1.
+
+Table 6
+In table 6, we have the values $\phi_1=-0.1$,$\phi_1=-0.95$, and $\phi_1=-0.75$. As we can see, we only have negative values for these cells.
+For the first cell, $\phi_1=-0.1$, we can immediately see a trend in the time series plot. It seems to expand away from zero very quickly and forms into a rather smooth plot, at least compared to other plots. It seems to be centered around zero, so stationarity looks fine. The ACF seems to oscillate between positive and negative values, but it's hard to determine wether it is actually declining. It doesnt look like its declining geometrically. The PACF only has one relevant value and decreases very fast, which is to be expected for an AR(1) process. We can see that the variance seems to be large, as the plot stretches from -40 to 40.
+
+For the second cell $\phi_1=-0.95$ we have a rather choppy time series plot. There seems to be a drift towards the highest and lowest values, but the plot itself still looks centered around zero. There seems to be a trend of somewhat harsh differences between one time of measurement and another. The ACF still oscillates, but at least now it seems to be declining the way we expect it to. PACF looks like expected with only one significant value.
+
+For the third cell $\phi_1=-0.75$, we still have an uneven, choppy time series plot, but it has improved somewhat compared to the previous cell. It looks to be more centered around zero overall, with a reduced variance compared to the second cell - the values only strech between -4 and 4, instead of -6 and 6. Thus we can say that the spread seems to be improved. We can also see that the ACF declines much faster than before. The oscillation is probably caused by the values of $\phi$ being negative and/or the variable being close to -1, as the decline of the ACF seems to speed up to higher the value of the parameter becomes. The PACF looks as expected.
+
+Table 7
+In table 6, we have the values $\phi_1=-0$,$\phi_1=0.75$,$\phi_1=-0.95$ and $\phi_1=1$. For this table, all values are positive.
+When $\phi_1=-0$, the process just becomes white noise, randomness - we have no parameters, just the error term. It doesnt follow the structures we expect for ACF and PACF, no significant finger and an non geometrial decline in the PACF. The plot itself looks centered if a bit uneven.
+
+For $\phi_1=0.75$, the plot looks centered around zero, but it looks rather uneven and choppy in its variation, the points seem to be spread further apart. It looks stationary, but not as clustered as the negative values were, as if something is slowly pulling the values away from each other. ACF and PACF looks as expected, with a fast decline of the ACF.
+
+The third cell $\phi_1=0.95$, looks even more uneven and spread out. The trend here seem to be lots of peaks with some very deep valleys. The plot is uneven, going from 5 to -10. We seem to be looking at an increase in choppyness the more we go towards 1. It looks like the plot is still focused on zero, but there is a lot more randomness in how far away from zero the values stretch. ACF decline has slowed considerably compared to the previous cell. PACF looks normal.
+
+For the fourth and final cell, $\phi_1=1$. Here we can see any pretense of stationarity evaporating, as the plot has a slope. Thus, it is no longer centered around zero. It still is choppy and even more uneven than before, as the entire plot is moving downwards. As we go from $\phi_1=-0.1$ to $\phi_1=1$, we see a general trend from a centered and smoother plot to an uncentered, choppy and non-stationary plot. The ACF of the start and the end actually look similar, if we were to disregard to oscillating ACF of $\phi_1=-0.1$ and put all the values as positive. We can thus say that ACF starts declining slower when $\phi_1$ becomes larger. PACF still remains the way we expect it to be, with only one fingerprint.
+
 ## Study for AR(2)
-###########################
+An autoregressive process of order 2, an AR(2), is a process where $Y_t$ depends on $Y_{t-1}$ as well as $Y_{t-2}$, and some white noise $e_t$.The process is *recursive*; $Y_t$ depends on it's own past values. More specifically, we have the model:
+
+AR(2):     $$Y_t = \Phi_1 Y_{t-1} + \Phi_2 Y_{t-2} + e_t$$
+where $e_t \sim NID(0, 1)$, and  $Cov(Y_{t-1}, e_t)=0$ by assumption. 
+
+where $\Phi_1$ describes how $Y_t$ depends on $Y_{t-1}$, and $\Phi_2$ how it depends on $Y_{t-2}$ As before, $e_t$ is identically and independently distributed with mean 0 and a constant variance. When having an AR process, it is impossible to calculate statistical properties such as expected value, variance and autocovariances without assuming stationarity. After the derivations have been made, one must check whether the assumpations actually are fulfilled. The full derivations are found in Appendix A, and only the resulting formulas are presented here; 
+
+Statistical properties:
+$$E(Y_t)=0 \\ \gamma_0=\sigma^2/(1-\phi_1^2-\phi_2^2) \\ \gamma_1= \phi*\sigma^2 / (1-\phi^2) \\ \gamma_2= \phi^2*\sigma^2 / (1-\phi^2) \\ \rho_1= \phi \\ \rho_2= \phi^2$$
 
 
-###########################
-## Study for ARMA(1,1)
-###########################
+
+
 
 \newpage
 
@@ -442,11 +498,11 @@ $$\begin{array}{l}{E\left(Y_{t}\right)=\phi_{0}/(1 - \phi_{1}- \phi_{2})} \end{a
 
 ### Variance
 
-$$\begin{array}{l}{\gamma_{0}=Cov\left(Y_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)} \\ + {Cov\left(Y_{t}, e_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+{Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}+\sigma^2\\{\gamma_{0}=\phi_{1}Cov\left(Y_{t-1}, Y_{t}\right)}+{\phi_{2}Cov\left( Y_{t-2}, Y_{t}\right)}+\sigma^2\\ {\gamma_{0}=\phi_{1} \gamma_{-1}+\phi_{2}\gamma_{-2}+\sigma^2}\end{array}$$
+$$\begin{array}{l}{\gamma_{0}=Cov\left(Y_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)} + {Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}  + {Cov\left(Y_{t}, e_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+{Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}+\sigma^2\\{\gamma_{0}=\phi_{1}Cov\left(Y_{t-1}, Y_{t}\right)}+{\phi_{2}Cov\left( Y_{t-2}, Y_{t}\right)}+\sigma^2\\ {\gamma_{0}=\phi_{1} \gamma_{-1}+\phi_{2}\gamma_{-2}+\sigma^2}\end{array}$$
 
 ### First autocovariance
 
-$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-1}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)}\\ + {Cov\left(e_{t}, Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-1}\right)} \\ + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-1}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{-1}\end{array}$$
+$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-1}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)}  + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)} + {Cov\left(e_{t}, Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)}  + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-1}\right)}  + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-1}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{-1}\end{array}$$
 
 ### Second autocovariance
 
