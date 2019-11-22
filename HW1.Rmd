@@ -498,11 +498,11 @@ $$\begin{array}{l}{E\left(Y_{t}\right)=\phi_{0}/(1 - \phi_{1}- \phi_{2})} \end{a
 
 ### Variance
 
-$$\begin{array}{l}{\gamma_{0}=Cov\left(Y_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)} \\ + {Cov\left(Y_{t}, e_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+{Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}+\sigma^2\\{\gamma_{0}=\phi_{1}Cov\left(Y_{t-1}, Y_{t}\right)}+{\phi_{2}Cov\left( Y_{t-2}, Y_{t}\right)}+\sigma^2\\ {\gamma_{0}=\phi_{1} \gamma_{-1}+\phi_{2}\gamma_{-2}+\sigma^2}\end{array}$$
+$$\begin{array}{l}{\gamma_{0}=Cov\left(Y_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)} + {Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}  + {Cov\left(Y_{t}, e_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+{Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}+\sigma^2\\{\gamma_{0}=\phi_{1}Cov\left(Y_{t-1}, Y_{t}\right)}+{\phi_{2}Cov\left( Y_{t-2}, Y_{t}\right)}+\sigma^2\\ {\gamma_{0}=\phi_{1} \gamma_{-1}+\phi_{2}\gamma_{-2}+\sigma^2}\end{array}$$
 
 ### First autocovariance
 
-$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-1}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)}\\ + {Cov\left(e_{t}, Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-1}\right)} \\ + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-1}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{-1}\end{array}$$
+$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-1}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)}  + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)} + {Cov\left(e_{t}, Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)}  + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-1}\right)}  + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-1}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{-1}\end{array}$$
 
 ### Second autocovariance
 
