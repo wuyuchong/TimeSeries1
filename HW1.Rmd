@@ -138,7 +138,7 @@ To get an even deeper understanding of how the MA(1) proccess behaves, we will n
 Table X(variable = y,z,x), meaning the first model has a variable value of y, second model z, etc.
 
 Table 1($\theta=-1,-0.45,0$)
-When $\theta=-1$, $Y_t$ depends negatively on $e_{t-1}$. The sample variance of the plot looks constant, which aligns with theory since the true variance is $1*(1+(-1)^2)= 2$. Moreover, there is no trend in our data, but rather a choppy spread centered around 0. The reason for this is the nature of $e_t$ as an independent, identically distributed random variable. When turning to the correlograms, they look as expected. The sample ACF has a spike statistically different from 0 at k=1 (where the true 
+When $\theta=-1$, $Y_t$ depends negatively on $e_{t-1}$. The sample variance of the plot looks constant, which aligneds with theory since the true variance is $1*(1+(-1)^2)= 2$. Moreover, there is no trend in our data, but rather a choppy spread centered around 0. The reason for this is the nature of $e_t$ as an independent, identically distributed random variable. When turning to the correlograms, they look as expected. The sample ACF has a spike statistically different from 0 at k=1 (where the true 
 $\rho = (-1/((-1)^2+1)= -0.5)$, and is 0 otherwise. The sample PACF looks geometrically decreasing, which is what we expect.
 
 When $\theta$ =-0.45, the model resembles the previous one, to a large degree. The major difference is that the variance of $Y_t$ now is smaller. One can see how the time series only moves between -3 and 3, instead of between -4 and 4 as in the previous case (note the different scales of the plots!) This makes sense, since the true variance in this case only is 1.2025. ACF looks like what we expect (true value -0.372 when k=1) and the PACF seems to be declining like we expect as well.
@@ -201,9 +201,9 @@ When $\theta{_1}=0$, and $\theta{_2}=0.7$, the model becomes:
 MA(2):	$$Y_t = 0.7*e_{t-2}  + e_t$$
 where $e_t \sim NID(0, 1)$
 
-We see only one spike in the sample ACF, at k=2, which aligns with theory. Since $\theta_1=0$, the true first autocorrelation becomes 0, and the second becomes -in this case- 0.329. The sample PACF is still geometrically decreasing. It does look like the sample estmation is a bit bigger, but still pretty close.
+We see only one spike in the sample ACF, at k=2, which aligneds with theory. Since $\theta_1=0$, the true first autocorrelation becomes 0, and the second becomes -in this case- 0.329. The sample PACF is still geometrically decreasing. It does look like the sample estmation is a bit bigger, but still pretty close.
 
-When $\theta{_1}=0.8$, and $\theta{_2}=0.7$, $Y_t$ is positively related to e both one and two periods back. The sample variance looks constant in the time series plot, which aligns with theory; a constant true variance at 2.49. The sample ACF now has two spikes, at k=1 and k=2, and naturally, both spikes are positive. The true values of the ACF are 0.638 (k=1) and 0.329 (k=2).
+When $\theta{_1}=0.8$, and $\theta{_2}=0.7$, $Y_t$ is positively related to e both one and two periods back. The sample variance looks constant in the time series plot, which aligneds with theory; a constant true variance at 2.49. The sample ACF now has two spikes, at k=1 and k=2, and naturally, both spikes are positive. The true values of the ACF are 0.638 (k=1) and 0.329 (k=2).
 
 
 Table 5($\theta_{2}=1$)
@@ -252,6 +252,7 @@ The third cell $\phi_1=0.95$, looks even more uneven and spread out. The trend h
 For the fourth and final cell, $\phi_1=1$. Here we can see any pretense of stationarity evaporating, as the plot has a slope. Thus, it is no longer centered around zero. It still is choppy and even more uneven than before, as the entire plot is moving downwards. As we go from $\phi_1=-0.1$ to $\phi_1=1$, we see a general trend from a centered and smoother plot to an uncentered, choppy and non-stationary plot. The ACF of the start and the end actually look similar, if we were to disregard to oscillating ACF of $\phi_1=-0.1$ and put all the values as positive. We can thus say that ACF starts declining slower when $\phi_1$ becomes larger. PACF still remains the way we expect it to be, with only one fingerprint.
 
 ## Study for AR(2)
+
 An autoregressive process of order 2, an AR(2), is a process where $Y_t$ depends on $Y_{t-1}$ as well as $Y_{t-2}$, and some white noise $e_t$.The process is *recursive*; $Y_t$ depends on it's own past values. More specifically, we have the model:
 
 AR(2):     $$Y_t = \Phi_1 Y_{t-1} + \Phi_2 Y_{t-2} + e_t$$
@@ -295,8 +296,7 @@ $$\begin{array}{l}{\operatorname{Var}\left(Y_{t}\right)=V\left(Y_{t}\right)} \\ 
 
 ### First autocovariance
 
-$$\begin{aligned} 
-\operatorname{cov}\left(Y_{t}, Y_{t-1}\right)=& \operatorname{Cov}\left(\theta_{1} e_{t-1}+e_{t}, \quad \theta_{1} e_{t-2}+e_{t-1}\right) \\=& \operatorname{Cov}\left(\theta_{1} e_{t-1} \quad \quad, \quad \theta_{1} e_{t-2} \quad \quad \quad)\right.\\+& 
+$$\begin{aligned} \operatorname{cov}\left(Y_{t}, Y_{t-1}\right)=& \operatorname{Cov}\left(\theta_{1} e_{t-1}+e_{t}, \quad \theta_{1} e_{t-2}+e_{t-1}\right) \\=& \operatorname{Cov}\left(\theta_{1} e_{t-1} \quad \quad, \quad \theta_{1} e_{t-2} \quad \quad \quad)\right.\\+& 
 \operatorname{Cov}\left(\theta_{1} e_{t-1} \quad \quad, \quad \quad \quad \quad \quad e_{t-1})\right.\\+& 
 \operatorname{Cov}\left(\quad \quad \quad \quad e_{t}, \quad \theta_{1} e_{t-2} \quad \quad \quad)\right.\\+& 
 \operatorname{Cov}\left(\quad \quad \quad \quad e_{t}, \quad \quad \quad \quad \quad e_{t-1}\right) \end{aligned}$$
@@ -367,7 +367,7 @@ $$\begin{array}{l}{\gamma_{1}=0+0+0-\theta_{1} \sigma^{2}+0+0+\theta_{1} \theta_
 ### Second autocovariance
 
 $${\gamma_{2}=\quad \text {Cov} \quad\left[Y_{t} \quad, Y_{t-2}\right]}$$
-$$\begin{align}Y_{t} &= e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2} \\ Y_{t-2} &= e_{t-2}-\theta_{1} e_{t-3}-\theta_{2} e_{t-4} \end{align}$$
+$$\begin{aligned}Y_{t} &= e_{t}-\theta_{1} e_{t-1}-\theta_{2} e_{t-2} \\ Y_{t-2} &= e_{t-2}-\theta_{1} e_{t-3}-\theta_{2} e_{t-4} \end{aligned}$$
 
 Thus,
 
@@ -579,7 +579,7 @@ $$e_t \sim NID(0, 1)$$
 
 Note that:
 
-$$ \begin{align}\phi(B) Y_{t} &= \theta(B) e_{t} \\ [\phi(B)]^{1} Y_{t} &= \theta(B) e_{t} \\ Y_{t} &= [\phi(B)]^{-1} \theta(B) e_{t} \end{align}$$
+$$ \begin{aligned}\phi(B) Y_{t} &= \theta(B) e_{t} \\ [\phi(B)]^{1} Y_{t} &= \theta(B) e_{t} \\ Y_{t} &= [\phi(B)]^{-1} \theta(B) e_{t} \end{aligned}$$
 
 That is:
 
