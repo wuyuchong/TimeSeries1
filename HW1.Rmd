@@ -50,71 +50,37 @@ sigma2        = 1    # variance of noise term
 
 \newpage
 
-# Introduction {-}
+#++++++NOTES+++++
+2. e distributed formula must be changed
+4. Names of AR(2) Tables wrong
+5. Something's off with autocorrelation in AR(2)
 
-We have five models to estimate. Will add more text later
+
+
+# 1. Introduction {-}
+Each stochastic process  implies a theoretical structure of the autocorrelation function (ACF). A particular dataset is a *realization* of some specific stochastic process. Hence, by analyzing at a sample ACF, one can approximate the underlying stochastic process, and find the proper model to estimate it, thereby being able to make forecasts. However, in order to be capable of matching a sample ACF with a theoretical one, one must first know the properties of the theoretical stochastic process and thereby it's ACF. Hence, we need to have a catalogue of theoretical ACF:s. The purpose of this paper is to review some MA(q), AR(p) and ARMA(p,q) processes, to create such a catalogue.
+
+Each section in the paper starts with a general discussion about the process in question, followed by a simulation excercise where we generate a sample based on the process in question. In that way, we can study the correlogram of the process. One important aspect of the discussion is whether a particular process is covariance stationary or not, since this has major implications for how to work with the process. The sample size in the simulations is set to 5000 (if nothing else is stated), but the plots only runs up to 500. 
+
+The paper is structured as follows. In section 2, the concept of covariance stationary is defined, which will be a point of reference in most of the following discussions. Section 3 and 4 discuss the MA(1) and MA(2) processes respectively, and section 5 and 6 discuss the AR(1) and AR(2). Section 7 covers the ARMA() process, and section 8 concludes.
+
 
 \newpage
 
-# Models
 
-We have five models to estimate and present:
-
-MA(1):     $$Y_t = e_t - \theta e_{t-1}$$
-
-MA(2):     $$Y_t = e_t - \theta_1 e_{t-1} - \theta_2 e_{t-2}$$
-
-AR(1):     $$Y_t = \Phi Y_{t-1} + e_t$$
-
-AR(2):     $$Y_t = \Phi_1 Y_{t-1} + \Phi_2 Y_{t-2} + e_t$$
-
-ARMA(1,1): $$Y_t = \Phi Y_{t-1} + e_t - \theta e_{t-1}$$
-
-
-
-For all the processes above, we have:
-
-$$e_t \sim NID(0, 1)$$
-
-
-# Theoretical values of models
-
-For each of the models, we need to derive and report the following theoretical properties:
-
-1. The Mean function: $$\mu = E(Y_t)$$
-2. The Variance function: $$\gamma_0 = V(Y_t)$$
-3. The First autocovariance: $$\gamma_1 = Cov(Y_t, Y_{t-1})$$
-4. The Second autocovariance: $$\gamma_2 = Cov(Y_t, Y_{t-2})$$
-5. The First Autocorrelation: $$\rho_1 = \gamma_1/\gamma_0$$
-6. The Second Autocorrelation: $$\rho_2 = \gamma_2/\gamma_0$$
-7. A general expression for the the Autocorrelation function as a function of
-the parameters of the process: $$\rho_k, k >= 1 $$
-
-The result is compiled in the following table. The exact calculations can be found in the appendix.
-
--Table here!-
-
-\newpage
-
-## The Concept of stationarity
-A covariance stationary process is a process where the statistical properties do not change over time. More specifically, this imposes three requirements:
+# 2. The Concept of stationarity
+A covariance stationary process is a process where the statistical properties do not change over time. This is of importance when we are trying to estimate a process. More specifically, covariance stationarity imposes three requirements:
 1.	$E(Y_t)$ constant over time
 2.	$Var(Y_t)$ constant over time
 3.	The autocovariance depends only on the distance between two observations, and not on where in time the observations are found
 
 
-### Simulation of models
-
-Here we simulate the models to get acess to the "fingerprint" or Sample auto correlation function (SACF).
 
 \newpage
 
-# Study
 
 
-##########################
 ## Study for MA(1)
-##########################
 
 A moving average process of order 1 -an MA(1) proccess- indicates a process where the output variable $Y_t$ depends linearly on current white noise as well as white noise in the previous period. More specifically, we have the model:
 
@@ -132,7 +98,9 @@ $\rho_2 = \gamma_2/\gamma_0 = 0$
 
 In order to have a covariance stationary MA(1) process, all three requirements for covariance stationarity must be fulfilled. Just by looking at the formula for the expected value and variance of $Y_t$, one understands that the first and second requirements indeed are fulfilled. Neither one of expressions are related to time. Moreover, to have a covariance stationary process, the autocovariances must be independent of where in the process the observations are found, and only depend on the distance between those observations. This is indeed the case, which is shown in Appendix A. As you see above, the first autocorrelation (using the lag 1) is a function of $\theta$ and $\sigma^2$, and the other covariances are simply 0. Hence, they do not depend on time, but only on the distance.
 
-We can hence conclude that an MA(1) process should be stationary no matter what the parameter is, as long as it is finite. Moreover, the first autocovariance is (positively) related to the MA(1) parameter, while the following ones are not. This has of course implications for the autocorrelations, since the autocorrelation is a function of the covariance. We expect a spike in the ACF at k=1, and 0 thereafter. Moreover, the PACF shows the partial autocorrelation function, which shows the autocorrelation using the lag k while controlling for the other k-1 lags. Hence, it is the marginal correlation of $Y_t$ and $Y_{t-k}$. We expect a geometrically decreasing PACF for an MA(1) process. Note here that the blue dotted lines in the correlagrams are the confidence intervals at the 95%-level. Hence, any spike reaching beyond a blue line is statistically different from 0 with 95% confidence.  
+We can hence conclude that an MA(1) process should be stationary no matter what the parameter is, as long as it is finite. Moreover, the first autocovariance is (positively) related to the MA(1) parameter, while the following ones are not. This has of course implications for the autocorrelations, since the autocorrelation is a function of the covariance. We expect a spike in the ACF at k=1, and 0 thereafter. Just by looking at the model one realizes that this is the case. $Y_t$ is related to the white noise only one period back. Hence, the interdependence between $Y_t$ and $e_{t-k}, k>1$ must be nonexistent.
+
+The PACF shows the partial autocorrelation function, which shows the autocorrelation using the lag k while controlling for the other k-1 lags. Hence, it is the marginal correlation of $Y_t$ and $Y_{t-k}$. We expect a geometrically decreasing PACF for an MA(1) process. Note here that the blue dotted lines in the correlagrams are the confidence intervals at the 95%-level. Hence, any spike reaching beyond a blue line is statistically different from 0 with 95% confidence.  
 
 To get an even deeper understanding of how the MA(1) proccess behaves, we will now turn to a simulation excercise where the parameter value will be varied. All simulation plots can be found in the Appendix B. We move through our tables from top to bottom, following the values of their parameters. We will be looking at each table at a time, with the following structure:
 Table X(variable = y,z,x), meaning the first model has a variable value of y, second model z, etc.
@@ -157,7 +125,6 @@ In summary, all simulations of the MA(1) process, using different parameter valu
 
 
 ## Study for MA(2)
-
 An MA(2) process includes not only white noise in the current and previous periods like the MA(1) process, but it also includes white noise *two* time periods back. More specifically, we have the model:
 
 MA(2):     $$Y_t = e_t - \theta_1 e_{t-1} - \theta_2 e_{t-2}$$
@@ -221,48 +188,143 @@ When $\theta{_1}=0.8$, and $\theta_2=1$ the process is in most aspects similar t
 
 
 ## Study for AR(1)
+An autoregressive process of order 1, an AR(1), is a *recursive* process, where $Y_t$ depends on itself one period back, as well as some white noise $e_t$. More specifically, we have the model:
 
-For the Autoregressive model, we first use only one variable, $\phi_1$, and set $\phi_2 = 0$ for this model. We have two models containing a total of 7 cells. Thus we have seven different values of $\phi_1$.
-
-We use the following model: $Y_{t}=\phi_{0}+\phi_{1} Y_{t-1}+e_{t}$.
-
+$$Y_{t}=\phi_{1} Y_{t-1}+e_{t}$$
 Where we assume $\operatorname{Cov}\left(Y_{t}, e_{t}\right)=0$, and where $e_{t} \sim iid(0,1)$
 
-Statistical properties:
-$$E(Y_t)=0 \\ \gamma_0=\sigma^2/(1-\Phi^2) \\ \gamma_1= \phi*\sigma^2 / (1-\phi^2) \\ \gamma_2= \phi^2*\sigma^2 / (1-\phi^2) \\ \rho_1= \phi \\ \rho_2= \phi^2$$
+$\phi_1$ describes how $Y_t$ depends on $Y_{t-1}$, and as before, $e_t$ is identically and independently distributed with mean 0 and a constant variance. When having an AR process, it is impossible to calculate statistical properties such as expected value, variance and autocovariances without *assuming* stationarity. Thus, after the derivations have been made, one must check whether the assumptions actually are fulfilled in a particular AR(1). The full derivations are found in Appendix A, where the reasons for the neccessity of a stationarity assumption also are presented. Here, it suffices to just present the resulting formulas:
 
-We expect ACF to decline geometrically and PACF to only have one value at K=1.
+$$E(Y_t)=0 \\ \gamma_0=\sigma^2/(1-\phi^2) \\ \gamma_1= \phi*\sigma^2 / (1-\phi^2) \\ \gamma_2= \phi^2*\sigma^2 / (1-\phi^2) \\ \rho_1= \phi \\ \rho_2= \phi^2$$
+
+Once again note that these formulas are derived under the *assumption* of stationarity. Consequently, they are not valid if the assumption of stationarity is violated.
+
+Unlike as in the MA() processes, the ACF (the $\rho$:s) in an AR(1) will not drop to 0 when k>1. The reason is the recursiveness of the AR(1) process. $Y_t$ depends on it's past values, which in turn depends on *it's* past values, etc. Hence, the relationship between $Y_t$ and any $Y_{t-k}$ can be decsribed by some specific function of $\phi_1$ To illustrate, we can subtsitute $Y_{t-1}$ in the model above:
+
+AR(1): $$Y_t = \phi_1(\phi_1Y_{t-2}+e_{t-1}) + e_t \\ Y_t = \phi_1^2(\phi_1Y_{t-3}+e_{t-2})+\phi_1e_{t-1} + e_t \\ Y_t = \phi_1^3(\phi_1Y_{t-4}+e_{t-3})+\phi_1e_{t-2}+\phi_1e_{t-1} + e_t \\ etc.$$
+
+It becomes evident that that $Y_{t-2}$ is related to $Y_t$ by $\phi_1^2$, $Y_{t-3}$ by $\phi_1^3$ etc. 
+
+Any $\rho_k$ will therefore also depend on $\phi_1$, more specifically $\rho_k=\phi_1^k$. Hence, the ACF will *not* be 0 for k>1. Thus, as long as $\phi_1<1$, we will expect a geometric decrease in the ACF as k increases.
+
+Also, we expect the PACF to have only one significant spike, at k=1, since this is the case for AR(1) processes.
+
+To check for stationarity in AR(1) processes, one studies the *characteristic equation*, which is defined as $(1-\phi_1X)=0$, generating the *root* $X=1/\phi_1$. This root is to be evaluated in relation to the unit circle. If the roots in absolute value is smaller than 1, the process in question is nonstationary. Of course, this is equivalent to requiring the abosolute value of $\phi_1$ to be smaller than 1. In summary, one must study a specific AR(1) process with a specific parameter value more in detail, to see whether it is stationary or not.
+
+This will be done in the following. We will discuss in total 7 different AR(1) processes, with different  of values on $\phi_1$, and for each process, comments on stationarity will be made.
+
+
 
 Table 6
-In table 6, we have the values $\phi_1=-0.1$,$\phi_1=-0.95$, and $\phi_1=-0.75$. As we can see, we only have negative values for these cells.
-For the first cell, $\phi_1=-0.1$, we can immediately see a trend in the time series plot. It seems to expand away from zero very quickly and forms into a rather smooth plot, at least compared to other plots. It seems to be centered around zero, so stationarity looks fine. The ACF seems to oscillate between positive and negative values, but it's hard to determine wether it is actually declining. It doesnt look like its declining geometrically. The PACF only has one relevant value and decreases very fast, which is to be expected for an AR(1) process. We can see that the variance seems to be large, as the plot stretches from -40 to 40.
+In table 6 in Appendix B, we have the values $\phi_1=-0.1$,$\phi_1=-0.95$, and $\phi_1=-0.75$. As we can see, we only have negative values for these cells.
+When $\phi_1=-0.1$, we can immediately see how $Y_t$ is centered around zero. Also, the variance seems to increase somewhat over time, which could indicate that this is not a covariance stationary process. However, the absolute value of $\phi$ is obviusly smaller than 1. Hence, we do have a covariance stationary process. This makes the formulas for the statistical prooperties above valid.
 
-For the second cell $\phi_1=-0.95$ we have a rather choppy time series plot. There seems to be a drift towards the highest and lowest values, but the plot itself still looks centered around zero. There seems to be a trend of somewhat harsh differences between one time of measurement and another. The ACF still oscillates, but at least now it seems to be declining the way we expect it to. PACF looks like expected with only one significant value.
+The sample ACF seems to oscillate between positive and negative values, reflecting the fact that $Y_t$ is negatively related to $Y_{t-1}$ in this process. It's hard to determine wether the ACF is actually declining or not, indicating a high inderdependence. The true value of the ACF when k=1 is -0.1 and when k=2 it is $(-0.1)^2=0.01$. Furthermore, the sample PACF only has one significant value and decreases very fast, which is to be expected for an AR(1) process. 
 
-For the third cell $\phi_1=-0.75$, we still have an uneven, choppy time series plot, but it has improved somewhat compared to the previous cell. It looks to be more centered around zero overall, with a reduced variance compared to the second cell - the values only strech between -4 and 4, instead of -6 and 6. Thus we can say that the spread seems to be improved. We can also see that the ACF declines much faster than before. The oscillation is probably caused by the values of $\phi$ being negative and/or the variable being close to -1, as the decline of the ACF seems to speed up to higher the value of the parameter becomes. The PACF looks as expected.
+When $\phi_1=-0.95$ we have a rather choppy time series plot. The variance varies greatly from time period to time period, and $Y_t$ looks centered around zero, wich would indicate nonstationarity. However $\phi_1$ is still smaller than 1, prooving the process to be covariance stationarity.
+
+The sample ACF still oscillates, and seems to be declining the way we expect it to as k increases. The true value of the ACF is -0.95 (k=1) and 0.9025 (k=2). The sample PACF looks like expected with only one significant value.
+
+When $\phi_1=-0.75$, we still have an uneven, choppy time series plot. It seems to be more centered around zero overall, with a reduced variance compared to the second cell - the values only strech between -4 and 4, instead of -6 and 6. We can also see that the sample ACF declines much faster than before. The sample PACF looks as expected.
+
 
 Table 7
 In table 6, we have the values $\phi_1=-0$,$\phi_1=0.75$,$\phi_1=-0.95$ and $\phi_1=1$. For this table, all values are positive.
-When $\phi_1=-0$, the process just becomes white noise, randomness - we have no parameters, just the error term. It doesnt follow the structures we expect for ACF and PACF, no significant finger and an non geometrial decline in the PACF. The plot itself looks centered if a bit uneven.
+When $\phi_1=-0$, the process just becomes white noise; we have no parameters but only the error term. For a closer discussion on white noise, please review the discussion for the MA(1) process where $\theta=0$, in Table 1.
 
-For $\phi_1=0.75$, the plot looks centered around zero, but it looks rather uneven and choppy in its variation, the points seem to be spread further apart. It looks stationary, but not as clustered as the negative values were, as if something is slowly pulling the values away from each other. ACF and PACF looks as expected, with a fast decline of the ACF.
+For $\phi_1=0.75$, the plot looks centered around zero, but it looks rather uneven and choppy in its variation, the points seem to be spread further apart. It is stationary since $\phi_1<0.75$. The sample ACF and PACF looks as expected, with a fast decline of the ACF.
 
-The third cell $\phi_1=0.95$, looks even more uneven and spread out. The trend here seem to be lots of peaks with some very deep valleys. The plot is uneven, going from 5 to -10. We seem to be looking at an increase in choppyness the more we go towards 1. It looks like the plot is still focused on zero, but there is a lot more randomness in how far away from zero the values stretch. ACF decline has slowed considerably compared to the previous cell. PACF looks normal.
+The third cell $\phi_1=0.95$, looks even more uneven and spread out. The plot is uneven, going from 5 to -10. We seem to be looking at an increase in choppyness the more we go towards 1 in $\phi_1$. It looks like the plot is still focused on zero, but there is a lot more randomness in how far away from zero the values stretch. The sample ACF decline has slowed considerably compared to the previous cell. The sample PACF looks normal.
 
-For the fourth and final cell, $\phi_1=1$. Here we can see any pretense of stationarity evaporating, as the plot has a slope. Thus, it is no longer centered around zero. It still is choppy and even more uneven than before, as the entire plot is moving downwards. As we go from $\phi_1=-0.1$ to $\phi_1=1$, we see a general trend from a centered and smoother plot to an uncentered, choppy and non-stationary plot. The ACF of the start and the end actually look similar, if we were to disregard to oscillating ACF of $\phi_1=-0.1$ and put all the values as positive. We can thus say that ACF starts declining slower when $\phi_1$ becomes larger. PACF still remains the way we expect it to be, with only one fingerprint.
+For the fourth and final cell, $\phi_1=1$, creating a *random walk* process. Since $\phi_1=1$, the process is not stationary.
+In the time series plot, we can see any pretense of stationarity evaporating, as the plot has a slope. Thus, it is no longer centered around zero. It still is choppy and even more uneven than before, as the entire plot is moving downwards. The sample ACF at the top of Table 6 and this one actually look similar, if we were to disregard the oscillating ACF of $\phi_1=-0.1$ and put all the values as positive. We can thus say that ACF starts declining slower when $\phi_1$ becomes larger. PACF still remains the way we expect it to be, with only one spike
+
+
 
 ## Study for AR(2)
 An autoregressive process of order 2, an AR(2), is a process where $Y_t$ depends on $Y_{t-1}$ as well as $Y_{t-2}$, and some white noise $e_t$.The process is *recursive*; $Y_t$ depends on it's own past values. More specifically, we have the model:
 
-AR(2):     $$Y_t = \Phi_1 Y_{t-1} + \Phi_2 Y_{t-2} + e_t$$
+AR(2):     $$Y_t = \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + e_t$$
 where $e_t \sim NID(0, 1)$, and  $Cov(Y_{t-1}, e_t)=0$ by assumption. 
 
-where $\Phi_1$ describes how $Y_t$ depends on $Y_{t-1}$, and $\Phi_2$ how it depends on $Y_{t-2}$ As before, $e_t$ is identically and independently distributed with mean 0 and a constant variance. When having an AR process, it is impossible to calculate statistical properties such as expected value, variance and autocovariances without assuming stationarity. After the derivations have been made, one must check whether the assumpations actually are fulfilled. The full derivations are found in Appendix A, and only the resulting formulas are presented here; 
+As the AR(1), the AR(2) process is not allways stationairy; it depends on the parameters of the process. The statistical properties stated below are derived under the *assumption* of stationarity, just as in the AR(1) case. The full derivations are found in Appendix A, and only the resulting formulas are presented here; 
 
 Statistical properties:
-$$E(Y_t)=0 \\ \gamma_0=\sigma^2/(1-\phi_1^2-\phi_2^2) \\ \gamma_1= \phi*\sigma^2 / (1-\phi^2) \\ \gamma_2= \phi^2*\sigma^2 / (1-\phi^2) \\ \rho_1= \phi \\ \rho_2= \phi^2$$
+$$E(Y_t)=0 \\ \gamma_0=\ \\ \gamma_1 = \\ \gamma_2 =  \\ \rho_{1}=\phi_{1}/(1-\phi_{2})\\ \rho_{2}=\phi_{1}^2/(1-\phi_{2})+\phi_{2}$$
+
+As in the AR(1) case, the ACF (the $\rho$:s) in an AR(2) will not drop to 0 when k is greater than the order of the process (in this case when k>2). The reason is again the recursiveness of the AR process. To illustrate also in the AR(2) case, we can subtsitute $Y_{t-1}$ and $Y_{t-2}$ in the model above:
+
+AR(2): $Y_t = \phi_1(\phi_1Y_{t-2}+\phi_2Y_{t-3}+e_{t-1}) + \phi_2(\phi1_1Y_{t-3}+\phi_2Y_{t-4}+e_{t-2}) + e_t$
+
+No need to mention that this substitution can go on forever, so that $Y_t$ depends on all it's past values.  It is harder to see the exact relationship here between $Y_t$ and any $Y_{t-k}$, making it harder to establish $\rho_k$, but what we at least know is that any $\rho_k$ will depend on $\phi_1$ and $\phi_2$ in some way. 
+
+To check for stationarity in AR(2) processes, one studies the characteristic equation, which is defined as $(1-\phi_1X-\phi_2X^2)=0$. Solving for X will in this case generate two X-values , two *roots* of the unit circle. If *either one* of these roots in absolute value is smaller than 1, the process in question is nonstationary. As in the AR(1) cases, one must study a specific AR(2) process, to see whether it is stationary or not.
+
+This will be done in the following. We will discuss in total 9 different AR(2) processes, with different combinations of values on $\phi_1$ and $\phi_2$, and for each process, comments on stationarity will be made.
+
+In Table 8 in Appendix B, $\phi_2$ is held constant at 0.1, while $\phi_1$ varies. In the following, each combination will be discussed.
+
+When $\phi_1=-0.9$, the $Y_t$ is negatively related to $Y_{t-1}$, and positively related to $Y_{t-2}$. The time series plot is centered quite densely around the mean, which by inspection seems to be 0. Hence, the first requirement for covariance stationarity seems to be fullfilled; a constant mean. However, the variance is obviously not constant; it increases over time and in some kind of cyclic pattern. Hence, this AR(2) process does not seem to fulfill the second requirement, namely a constant variance. This can be formally checked by analyzing the characteristic equation, which in this case is: 
+$$(1-(-0.9)X-0.1X^2)=0 \\ (1+0.9X-0.1X^2)=0$$
+solving for X gives the roots $X_1=9.1$ and $X_2=-0.11$, and since the latter  is smaller than the unit circle, the process is indeed nonstationary. This in turn invalidates the statistical properties stated above.
+
+Turning to the sample ACF and PACF; we see a large interdependence, and basically no decrease of the spikes in the ACF as k increases. At the first lag, the sample autocorrelation is negative, since $Y_t$ is negatively related to itself one period back. Using the same logic the autocorrelation at the second lag is positive. Moreover, we see that the ACF do not drop to 0 when k becomes bigger than 2 as in the MA() processes. This is exactly what we expected. Also, no decrese as k increses is seen in the sample ACF, indicating a large interdependence. According to the formulas for $\rho_1$ and $\rho_2$ above, the value of the ACF when k=1 is $(-0.9)/(1-0.1)=-1$ and when k=1 it is $(-0.9)^2/(1-0.1) + 0.1=1$. However, those formulas were derived under the assumption of stationarity, which is not the case in this particular process.
+
+The sample PACF shows two significant spikes at k=1 and k=2, and thereafter the spikes are undistinguishable from 0. 
+
+When $\phi_1=0$ instead, we get the model:
+
+AR(2):     $$Y_t = 0.1* Y_{t-2} + e_t$$
+So that $Y_t$ only depends on Y two time periods back, as well as the white noise. When studying the time series plot and the correlograms, it actually reminds a little bit of a white noise process. Perhaps, the reason is that $\phi_2$ is pretty small, so that the relationship between $Y_t$ and $Y_{t-2}$ does not become that pronounced. (For a discussion about white noise, please review the discussion of the MA(1) process, where $\theta=0$, in Table 1.) However, a vague resemblance is not an exact match.
+
+To evaluate stationarity we turn to the characteristic equation:
+$$(1-0.1X^2)=0$$
+Solving for X we get the roots $X±3.16$, placing us outside the unit circle. Thus, this process is stationary, and as a result, the stated formulas above are valid. Calculating the first autocorrelation, we get $0/(1+0.9)=0$, and the second one is $0/(1+0.9)+0.1=0.1$. Looking at the sample ACF, it actually looks like a good estimation of the true value, but since it is so small it is naturally harder to make precise estimations. Therefore, it falls within the 95% confidence interval.
+
+When $\phi_1=0.7$ (and $\phi_2=0.1$ as before), the time series plot becoem less centered around 0. Instead, it looks like it is drifting a bit, although still around 0. Also, it is hard to say anything about whether the variance is constant or not. Consequently, it is hard to discern evidence on stationarity from the plot. Instead, we turn to the characteristic equation:
+$$(1-0.7X-0.1X^2)=0$$
+Which generates the roots $X=1.22$ and $X=-8.22$, placing us outside the unit circle. Hence, this particular AR(2) process is stationary. The true mean is 0, and the variance is constant. Of course, the autocovariances also consequently only depends on k, and not on time, since this is the third requirement for stationarity.
+
+The true first autocorrelation is 0.778, an the second is 0.644. THIS DOES NOT MATCH THE CORRELOGRAM!!
 
 
+In Table 9 in Appenx B, $\phi_2=0.2$, while $\phi_1$ is allowed to vary. In the following, each combination will be discussed.
+
+When $\phi_1$ simultaneously was set to -0.9, the simulation program broke down using the sample size 5000. Therefore, the plot shows a sample of 500 instead. In this AR process, $Y_t$ depends negatively on Y one period back, and positively on Y two periods back. Perhaps, it can be thought of as a more "extreme" version of the AR(2) $\phi_2=0.1$, $\phi_1=-0.9$ in Table 8. The difference between the two processes is a doubling of $\phi_2$. The time series plot shows little variation in Y (note however the scale!) until very late in the process, where the variance litteraly explodes. At the original sample size, the variance  probably became so very large so that the program could not handle it anymore. So the variance seems to diverge into infinity, and consequently, this process is obviously not stationary. However to formally analyze this, we take a look at the characteristic equation:
+$$(1-(-0.9)X-0.2X^2)=0 \\(1+0.9X-0.2X^2)=0$$
+Which generates the roots: $X_1=5.42$ and $X_2=-0.922$. Since $X_2$ is within the unit circle, the process is nonstationary. Moreover, the sample ACF is geometrically decreasing. At k=1, the value of the ACF is negative, and at k=2 it is positive, reflecting the signs of $\phi_1$ and $\phi_2$ respectively. Thereafter, the sample ACF is geometrically decreasing, reflecting the recursiveness of the process. The sample PACF shows a large spike at k=1, and thereafter no significant spikes at all. 
+
+When $\phi_1$ is set to 0, we get the model:
+AR(2):     $$Y_t = 0.2* Y_{t-2} + e_t$$
+so that $Y_t$  depends on itself only two periods back. In many aspects, it is very similar to the AR(2) process $\phi_1=0, \phi_2=0.1$ in Table 8. However here, we do see some significant spikes in correlogram. That is logic, since some more interdependence should be expected when $\phi_2$ is doubled. To check for stationarity we set up the characteristic equation:
+$$(1-0.2X^2)=0$$
+Which generates the roots $X±2.23$. Since they are outside the unit circle, this process is stationary too.
+
+When $\phi_1$ is set to 0.7, the time series plot shows clear signs of a cyclic variation, centered around a value smaller than 0.
+
+The caracteristic equation:
+$$(1-0.7X-0.2X^2)=0$$
+generates the roots $X_1=4.59$ and $X_2=-1.09$. Since they are both outside the unit circle, the process is stationary. The true first autocorrelation is $(0.7/(1-0.2)=0.875$ and the second is $0.7^2/(1-0.2)+0.2=0.813$. They seem to be properly estimated when looking at the sample ACF graph. The spikes in the sample ACF continue to decrease towards 0 as k increases. Moreover, there are 2 significant spikes in the sample PACF. This process has many similarities with the AR(2) $\phi_1=0.7, \phi_2=0.1$ in Table 8. Here however, ACF decreases at a greater speed. Also, the value of the sample PACF is a lot larger, while it is smaller when k=2.
+
+
+In Table 10 in Appendix B, $\phi_2=0.8$, while $\phi_1$ is allowed to vary. In the following, each combination of parameters will be discussed.
+
+When $\phi_1=-0.9$ the simulation program broke down at the original sample size. Therefore, we chose a sample size of 500 instead. The process very much looks like a further more "extreme" case of the AR(2) $\phi_2=0.1$, $\phi_1=-0.9$ in Table 8, as well as the AR(2) $\phi_2=0.2$, $\phi_1=-0.9$ in Table 9. The variance increases towards infinity, and the process is obviously not stationary. Hence, as $\phi_1$ is held constant at -0.9, the processes become more and more "extreme" as $\phi_2$ increases.
+
+When $\phi_1$ is set to 0, we once again (as in AR(2) $\phi_2=0.1 \phi_1=0$ in Table 8, or $\phi_2=0.2 \phi_1=0$ in Table 9) have an AR(2) model with only two terms:
+AR(2):     $$Y_t = 0.8* Y_{t-2} + e_t$$
+
+However this process does not at all resemble white noise. We have a lot of significant spikes in the sample ACF, and one significant spike in the sample PACF. The interpendence is naturally larger here, since $\phi_2$ has been quadrupled compared to Table 9. 
+
+To check for stationarity we set up the characteristic equation:
+$$(1-0.8X^2)=0$$
+Which generates the roots $X±1.118$. Since they are outside the unit circle, this process is stationary. One interesting note is that the bigger the $\phi_2$ has become (holding $\phi_1$ constant at 0), the closer have the roots come to unity. It is very plausible that if $\phi_2$ was increased further, the process would become nonstationary.
+
+When $\phi_1=0.7$ in Table 10, the simulation program broke down at the original sample size. Therefore, the sample size was set at n=500 instead. In the time series plot, there seems to be little variation (not however the scale!) until the time periods just before 500, where it dramatically drops. Actually, this looks like an ARMA process.
+
+We look for stationarity by analyzing the characteristic equation:
+$$(1-0.7X-0.8X^2)$$
+which gives the roots: $X_1=-1.64$ and $X_2=0.76$. Since the latter is within the unit circle, the process is -perhaps not suprisingly after inspecting the time series plot- nonstationary. The sample ACF is decreasing as k increases, and the sample PACF is showing one spike at k=1 but nothing thereafter.
 
 
 
@@ -272,7 +334,6 @@ $$E(Y_t)=0 \\ \gamma_0=\sigma^2/(1-\phi_1^2-\phi_2^2) \\ \gamma_1= \phi*\sigma^2
 
 \newpage
 
-# Appendix
 
 ## Appendix A
 
@@ -400,6 +461,10 @@ thus, the second autocorrelation is
 
 $$\rho_{2}=\frac{\gamma_{2}}{\gamma_{0}}=\frac{-\theta_{2}}{\left(1+\theta_{1}^{2}+\theta_{2}^{2}\right)}$$
 
+### General expression for the autocorrelation
+
+$$\begin{array}{c}{\gamma_{k}=0 \text { for all } k \geq 3} \\ {\rho_{k}=\frac{\gamma_{k}}{\gamma_{0}}=0 \text { for all } k \geq 3}\end{array}$$
+
 
 ## Derivation for AR(1)
 
@@ -427,28 +492,38 @@ $$\begin{aligned} E\left(Y_{t}\right) &=\phi_{0}+\phi_{1} E\left(Y_{t}\right)+0 
 
 ### Variance
 
-$$\begin{array}{l}{\gamma_{0}=Var\left(\phi_{1} Y_{t-1}+e_{t}\right)} \\ {\gamma_{0}=Var\left(\phi_{1} Y_{t-1}\right)+Var\left(e_{t}\right)+2 \operatorname{Cov}\left(\phi_{1} Y_{t-1}, e_{t}\right)} \\ {\gamma_{0}=\phi_{1}^{2} Var\left(Y_{t-1}\right)+Var\left(e_{t}\right)+2 \phi_{1} \operatorname{Cov}\left( Y_{t-1}, e_{t}\right)} \\ {\gamma_{0}=\phi_{1}^{2} Var\left(Y_{t}\right)+\sigma^{2}+2 \phi_{1} \times 0} \\ {\gamma_{0}=\phi_{1}^{2}\gamma_{0}+\sigma^{2}}\end{array}$$
-
+$$\begin{array}{l}{\gamma_{0}=Var\left(\phi_{1} Y_{t-1}+e_{t}\right)} \\ {\gamma_{0}=Var\left(\phi_{1} Y_{t-1}\right)+Var\left(e_{t}\right)+2 \operatorname{Cov}\left(\phi_{1} Y_{t-1}, e_{t}\right)} \\ {\gamma_{0}=\phi_{1}^{2} Var\left(Y_{t-1}\right)+Var\left(e_{t}\right)+2 \phi_{1} \operatorname{Cov}\left( Y_{t-1}, e_{t}\right)} \\ {\gamma_{0}=\phi_{1}^{2} Var\left(Y_{t}\right)+\sigma^{2}+2 \phi_{1} \times 0} \\ {\gamma_{0}=\phi_{1}^{2}\gamma_{0}+\sigma^{2}} \\ \gamma_0=\sigma^2/(1-\phi_1^2)\end{array}$$
 
 ### First autocovariance
 
-$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-1}) + Cov(e_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-1}\right) + 0} \\ {\gamma_{1}=\phi Cov(Y_{t-1},Y_{t-1})} \\ {\gamma_{1}=\phi Cov(Y_{t},Y_{t-0})} \end{array}$$
-
+$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1},Y_{t-1}) + Cov(e_{t},Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi Y_{t-1},Y_{t-1}\right) + 0} \\ {\gamma_{1}=\phi Cov(Y_{t-1},Y_{t-1})} \\ \end{array}$$
+Since we assume stationarity, the autocovariance only depends on the lag and not on where in the process we are. Hence, the covariance does not change when we lead or lag the variables, as long as we make sure to keep the distance between them. We  lead the variables in the expression above, and get;
+$${\gamma_{1}=\phi Cov(Y_{t},Y_{t-0})}$$
+and since
 $${Cov(Y_{t},Y_{t-0}) = Var(Y_{t-0}) = \gamma_{0}}$$
 
-thus we have
+we have
 
 $$\gamma_{1}=\phi \gamma_{0}$$
+By inserting the expression for $\gamma_0$, we get;
+$$\gamma_1= \phi*\sigma^2 / (1-\phi^2)$$
+
 
 ### Second autocovariance
 
-$$\begin{array}{l}{\gamma_{2}=Cov\left(Y_{t},Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi Y_{t-1},Y_{t-2}\right) = 0} \\ {\gamma_{2}=\phi Cov\left(Y_{t-1},Y_{t-2}\right)} \\ {\gamma_{2}=\phi Cov\left(Y_{t},Y_{t-1}\right)}\end{array}$$
-
+$$\begin{array}{l}{\gamma_{2}=Cov\left(Y_{t},Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi Y_{t-1}+e_{t},Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi Y_{t-1},Y_{t-2}\right) = 0} \\ {\gamma_{2}=\phi Cov\left(Y_{t-1},Y_{t-2}\right)}\end{array}$$
+Assuming stationarity, we can lead the variables and get;
+$${\gamma_{2}=\phi Cov\left(Y_{t},Y_{t-1}\right)}$$
+Since
 $${Cov(Y_{t},Y_{t-1}) = Var(Y_{t-1}) = \gamma_{1}}$$
 
-thus we have
+We have;
 
 $$\gamma_{2}=\phi \gamma_{1}$$
+
+By inserting the expression for $\gamma_1$, we get;
+$$\gamma_2= \Phi^2*\sigma^2 / (1-\Phi^2)$$
+
 
 ### First autocorrelation
 
@@ -469,7 +544,7 @@ $$\rho_{2}=\phi^2$$
 ## Derivation for AR(2)
 
 ### Model
-
+We have the general AR(2) model:
 $$Y_{t}=\phi_{0}+\phi_{1} Y_{t-1}+\phi_{2} Y_{t-2}+e_{t}$$
 
 Where we assume 
@@ -478,16 +553,16 @@ $$\operatorname{Cov}\left(Y_{t-1}, e_{t}\right)=0$$
 
 and
 
-
 $$\operatorname{Cov}\left(Y_{t-2}, e_{t}\right)=0$$
 
 and where $e_{t} \sim iid(0,1)$
 
+
 ### Mean
 
-$$\begin{array}{l}{E\left(Y_{t}\right)=E\left(\phi_{0}+\phi_{1} Y_{t-1}+\phi_{1} Y_{t-2}+e_{t}\right)} \\ {E\left(Y_{t}\right)=\phi_{0}+\phi_{1} E\left(Y_{t-1}\right)+\phi_{2} E(Y_{t-2})+E\left(e_{t}\right)}\\ E\left(Y_{t}\right)=\phi_{0}+\phi_{1} E\left(Y_{t-1}\right)+\phi_{2} E(Y_{t-2}) \end{array}$$
+$$\begin{array}{l}{E\left(Y_{t}\right)=E\left(\phi_{0}+\phi_{1} Y_{t-1}+\phi_{2} Y_{t-2}+e_{t}\right)} \\ {E\left(Y_{t}\right)=\phi_{0}+\phi_{1} E\left(Y_{t-1}\right)+\phi_{2} E(Y_{t-2})+E\left(e_{t}\right)}\\ E\left(Y_{t}\right)=\phi_{0}+\phi_{1} E\left(Y_{t-1}\right)+\phi_{2} E(Y_{t-2}) \end{array}$$
 
-then we assume stationarity
+then we assume stationarity, so that the expected value is constant over time;
 
 $$\begin{array}{l}{E\left(Y_{t}\right)-\phi_{1} E\left(Y_{t}\right)+\phi_{2} E(Y_{t}) = \phi_{0}} \\
 {E\left(Y_{t}\right)(1-\phi_{1} -\phi_{2}) = \phi_{0}} \end{array}$$
@@ -496,17 +571,51 @@ thus
 
 $$\begin{array}{l}{E\left(Y_{t}\right)=\phi_{0}/(1 - \phi_{1}- \phi_{2})} \end{array}$$
 
+
 ### Variance
+$$\begin{array}{l}{\gamma_{0}=Cov\left(Y_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+ {Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)} + {Cov\left(Y_{t}, e_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+{Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}+\sigma^2\\{\gamma_{0}=\phi_{1}Cov\left(Y_{t-1}, Y_{t}\right)}+{\phi_{2}Cov\left( Y_{t-2}, Y_{t}\right)}+\sigma^2 \end{array}$$
+Since we assume stationairity, we can lead the variables;
+$${\gamma_{0}=\phi_{1}Cov\left(Y_{t}, Y_{t+1}\right)}+{\phi_{2}Cov\left( Y_{t}, Y_{t+2}\right)}+\sigma^2 \\{\gamma_{0}=\phi_{1} \gamma_{-1}+\phi_{2}\gamma_{-2}+\sigma^2}$$
+Which of course, under stationarity, also can be expressed as;
+$$\gamma_{0}=\phi_{1} \gamma_{1}+\phi_{2}\gamma_{2}+\sigma^2$$
 
-$$\begin{array}{l}{\gamma_{0}=Cov\left(Y_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)} + {Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}  + {Cov\left(Y_{t}, e_{t}\right)} \\ {\gamma_{0}=Cov\left(\phi_{1} Y_{t-1}, Y_{t}\right)}+{Cov\left(\phi_{2} Y_{t-2}, Y_{t}\right)}+\sigma^2\\{\gamma_{0}=\phi_{1}Cov\left(Y_{t-1}, Y_{t}\right)}+{\phi_{2}Cov\left( Y_{t-2}, Y_{t}\right)}+\sigma^2\\ {\gamma_{0}=\phi_{1} \gamma_{-1}+\phi_{2}\gamma_{-2}+\sigma^2}\end{array}$$
+### The First autocovariance
+$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-1}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)} + {Cov\left(e_{t}, Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)} + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)+0}\\{\gamma_{1}=\phi_{1} Cov\left(Y_{t-1}, Y_{t-1}\right)} + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-1}\right)}\end{array}$$
+Assuming stationarity, we can lead the variables as many times as we want, as long as we keep the distance between them constant:
+$${\gamma_{1}=\phi_{1} Cov\left(Y_{t}, Y_{t}\right)} + {\phi_{2}Cov\left(Y_{t}, Y_{t+1}\right)}$$
+$$\gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{-1}$$
+Which then of course also can be expressed as:
+$$\gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{1}$$
 
-### First autocovariance
+### The second autocovariance
+$$\begin{array}{l}{\gamma_{2}=Cov\left(Y_{t} , Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-2}\right)}\\ {\gamma_{2}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-2}\right)} + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-2}\right)}+ {Cov\left(e_{t}, Y_{t-2}\right)} \\ {\gamma_{2}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-2}\right)} + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-2}\right)+0}\\{\gamma_{2}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-2}\right)} + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-2}\right)}\end{array}$$
+Assuming stationarity, we can lead the variables as many times we wish, as long as we keep the distance between them;
+$${\gamma_{2}=\phi_{1} (Cov\left(Y_{t}, Y_{t-1}\right)} + {\phi_{2}Cov\left(Y_{t}, Y_{t}\right) \\ \gamma_{2}=\phi_{1}\gamma_{1}+\phi_{2}\gamma_{0}}$$
 
-$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-1}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)}  + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)} + {Cov\left(e_{t}, Y_{t-1}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-1}\right)}  + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-1}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-1}\right)}  + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-1}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{0}+\phi_{2}\gamma_{-1}\end{array}$$
 
-### Second autocovariance
 
-$$\begin{array}{l}{\gamma_{1}=Cov\left(Y_{t} , Y_{t-2}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1} + \phi_{2} Y_{t-2} + e_{t} , Y_{t-2}\right)}\\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-2}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-2}\right)}\\ + {Cov\left(e_{t}, Y_{t-2}\right)} \\ {\gamma_{1}=Cov\left(\phi_{1} Y_{t-1}, Y_{t-2}\right)} \\ + {Cov\left(\phi_{2} Y_{t-2}, Y_{t-2}\right)+0}\\{\gamma_{1}=\phi_{1} (Cov\left(Y_{t-1}, Y_{t-2}\right)} \\ + {\phi_{2}Cov\left(Y_{t-2}, Y_{t-2}\right)}\\ \gamma_{1}=\phi_{1}\gamma_{1}+\phi_{2}\gamma_{0}\end{array}$$
+### The Equation system for the variance and autocovariances
+The expressions for $\gamma_0$,$\gamma_1$ and $\gamma_2$ provide an equation system with three equations and three unknowns:
+$$(i) \ \ \ \ \gamma_0=\phi_1\gamma_1+\phi_2\gamma_{2}+\sigma^2 \\(ii) \ \ \ \ \ \ \ \ \  \gamma_1=\phi_{1}\gamma_{0}/(1-\phi_{2}) \\ (iii) \ \ \ \ \ \ \ \ \ \ \  \gamma_{2}=\phi_{1}\gamma_{1}+\phi_{2}\gamma_{0}$$
+This equation system has to be solved in order to get the variance and the autocovariances as functions of $\phi$ and $\sigma^2$.
+(i) $$ => \gamma_2 = (\gamma_0-\phi_1\gamma_1-\sigma^2) / \phi_2$$
+Insert (ii) in (iii) => $$\gamma_2=(\phi_1^2\gamma_0) / (1-\theta_2) + \phi_2\gamma_0$$
+Equating the both expressions:
+$$\gamma_2=\gamma_2 \\ (\gamma_0-\phi_1\gamma_1-\sigma^2) / \phi_2 = (\phi_1^2\gamma_0) / (1-\theta_2) + \phi_2\gamma_0$$
+Solving for $\gamma_0$ gives;
+$$\gamma_0 = \sigma^2(1-\phi_2)  /  (1-\phi_2-\phi_1^2-\phi_1^2\phi_2-\phi_2^2-\phi_2^3)$$
+Inserting this in (ii) gives an expression for $\gamma_1$:
+
+$$\gamma_1 = \phi_1\sigma^2  /  [(1-\phi_2)(1-\phi_2-\phi_1^2-\phi_1^2\phi_2-\phi_2^2-\phi_2^3)]$$
+And inserting the expressions for $\gamma_0$ and $\gamma_1$ into (iii) gives the expression for $\gamma_2$:
+$$\gamma_2 = [\sigma^2(\phi_1^2+\phi_2(1-\phi_2)^2)]  /  [(1-\phi_2)(1-\phi_2-\phi_1^2-\phi_1^2\phi_2-\phi_2^2-\phi_2^3)]$$
+
+
+
+
+
+
+
 
 ### First autocorrelation
 
@@ -561,7 +670,7 @@ $$\rho_{2}=\phi_{1}(\phi_{1}/(1-\phi_{2}))+\phi_{2}$$
 
 which is the same as
 
-$$\rho_{2}=\phi^2_{1}/(1-\phi_{2}))+\phi_{2}$$
+$$\rho_{2}=\phi^2_{1}/(1-\phi_{2})+\phi_{2}$$
 we convert them to one numenator and get
 
 $$\rho_{2}=\phi^2_{1}+\phi_{2}(1-\phi_{2})/(1-\phi_{2})$$
