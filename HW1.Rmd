@@ -141,45 +141,38 @@ $$\gamma_2 = Cov(Y_t, Y_{t-2})= \theta_2*\sigma^2$$
 $$\rho_1  = \theta_1*(\theta_2+1) /(\theta_1^2 + \theta_2^2+1)$$
 $$\rho_2 = \theta_2 / (\theta_2^2 + theta_1^2+1)$$
 
-In conclusion, an MA(2) process should be stationary no matter what the parameters are, as long as they are finite. When it comes to the ACF, we expect spikes at k=1 and at k=2, but not thereafter, since the autocovariances for k>2 are equal to 0. Also, we expect a geometrically decreasing PACF.
+In conclusion, an MA(2) process should be stationary no matter what the parameters are, as long as they are finite. When it comes to the ACF, we expect spikes at k=1 and k=2, but not thereafter, since the autocovariances for k>2 are equal to 0. Also, we expect a geometrically decreasing PACF.
 
-In the following, we will discuss simulations of the the MA(2) process using different combinations of $\theta_1$ and $\theta_2$. The section follows this structure: Table X($\theta_{2}$). $\theta_{1}$ is set to the values, -0.8, 0 and 0.8 in that order.
-
-
+In the following, we will discuss simulations of the MA(2) process using different combinations of $\theta_1$ and $\theta_2$. The section follows this structure: Table X($\theta_{2}$). $\theta_{1}$ is set to the values, -0.8, 0 and 0.8 in that order.
 
 Table 3($\theta_{2}=0$)
 In Table 3,  since $\theta_{2}=0$, the MA(2) process essentially collapses into  MA(1) processes or simply white noise, depending on what $\theta_1$ is.
 
-In the first cell $\theta_1=-0.8$, creating an MA(1) process with the parameter value -0.8. The fact that this really is an MA(1) process is evident in the sample, since the sample ACF only has one spike, at k=1. Moreover, the PACF looks similar to the one in the MA(1) processes where $\theta$ was set to negative values in Table 1.
+In the first cell $\theta_1=-0.8$, creating an MA(1) process with the parameter value -0.8. The fact that this is an MA(1) process is evident in the sample, since the sample ACF only has one spike, at k=1. Moreover, the PACF looks similar to the one in the MA(1) processes where $\theta$ was set to negative values in Table 1.
 
 When $\theta_1=0$, we once again get a white noise process. For a further discussion on white noise, please review the section discussing the MA(1) process where $\theta=0$ in Table 1. We can see similarities in ACF and PACF with this process, as we have no significant spikes, and a non-geometrical change in PACF.
 
-When $\theta_{1}=0.8$, we get an MA(1) process with the parameter value 0.8. The sample ACF only has one spike, at k=1, and the PACF looks similar to the ones in the MA(1) processes where $\theta$ was set to 1 and 2 respectively. The time series looks fairly centered, however it is somewhat spread in some places.
-
-
+When $\theta_{1}=0.8$, we get an MA(1) process with the parameter value 0.8. The sample ACF only has one spike, at k=1, and the PACF looks similar to the ones in the MA(1) processes where $\theta$ was set to 1 and 2 respectively. The time series looks fairly centered, however, it is somewhat spread in some places.
 
 Table 4($\theta_{2}=0.7$)
 In Table 4, $\theta_2=0.7$, creating a full MA(2) process, with terms for the white noise in the current and past white noise, as well as the white noise two periods back.
 
-When $\theta_1=-0.8$ and $\theta_2=0.7$, $Y_t$ is positively related to $e_t$ two periods back, and negatively related to $e_t$ in the previous period.  The sample variance look constant in the time series plot, which is according to theory since the true variance is constant at $1*(1+(-0.8)^2+0.7^2)= 1.4964$. Moreover, there is no trend in the data, but rather a choppy spread constantly around 0, just as in the MA(1) cases.  The sample ACF now has two spikes, at k=1 and k=2. The first spike is negative (true value -0.638), indicating the negative relationship between $Y_t$ and $e_{t-1}$. The second spike is on the other hand positive (true value 0.230), since $e_{t-2}$ is positively related to $Y_t$.
+When $\theta_1=-0.8$ and $\theta_2=0.7$, $Y_t$ is positively related to $e_t$ two periods back, and negatively related to $e_t$ in the previous period.  The sample variance looks constant in the time series plot, which is according to theory since the true variance is constant at $1*(1+(-0.8)^2+0.7^2)= 1.4964$. Moreover, there is no trend in the data, but rather a choppy spread constantly around 0, just as in the MA(1) cases.  The sample ACF now has two spikes, at k=1 and k=2. The first spike is negative (true value -0.638), indicating the negative relationship between $Y_t$ and $e_{t-1}$. The second spike is on the other hand positive (true value 0.230), since $e_{t-2}$ is positively related to $Y_t$.
 
 When $\theta{_1}=0$, and $\theta{_2}=0.7$, the model becomes:
 
-MA(2):	$$Y_t = 0.7*e_{t-2}  + e_t$$
+MA(2):    $$Y_t = 0.7*e_{t-2}  + e_t$$
 where $e_t \sim NID(0, 1)$
 
-We see only one spike in the sample ACF, at k=2, which aligneds with theory. Since $\theta_1=0$, the true first autocorrelation becomes 0, and the second becomes -in this case- 0.329. The sample PACF is still geometrically decreasing. It does look like the sample estmation is a bit bigger, but still pretty close.
+We see only one spike in the sample ACF, at k=2, which aligns with theory. Since $\theta_1=0$, the true first autocorrelation becomes 0, and the second becomes -in this case- 0.329. The sample PACF is still geometrically decreasing. It does look like the sample estimation is a bit bigger, but still pretty close.
 
-When $\theta{_1}=0.8$, and $\theta{_2}=0.7$, $Y_t$ is positively related to e both one and two periods back. The sample variance looks constant in the time series plot, which aligneds with theory; a constant true variance at 2.49. The sample ACF now has two spikes, at k=1 and k=2, and naturally, both spikes are positive. The true values of the ACF are 0.638 (k=1) and 0.329 (k=2).
-
+When $\theta{_1}=0.8$, and $\theta{_2}=0.7$, $Y_t$ is positively related to e both one and two periods back. The sample variance looks constant in the time series plot, which aligns with theory; a constant true variance at 2.49. The sample ACF now has two spikes, at k=1 and k=2, and naturally, both spikes are positive. The true values of the ACF are 0.638 (k=1) and 0.329 (k=2).
 
 Table 5($\theta_{2}=1$)
-In Table 5,  $\theta_2=1$. Compared to before, 
-
-When $\theta{_1}=-0.8$, and $\theta{_2}=1$, $Y_t$ is negatively related to e one period back and positively realted to e two periods back. The variance looks constant in the time series plot, which makes sense since the true variance is constant at 2.64. The sample ACF looks as a good estimation of the true autocorrelations, as in the previous cases. The true value of the ACF when k=1 is -0.606, and when k=2 it is 0.379. The PACF is geometrically decreasing, as expected.
+In Table 5,  $\theta_2=1$. Compared to before, when $\theta{_1}=-0.8$, and $\theta{_2}=1$, $Y_t$ is negatively related to $e$ one period back and positively related to e two periods back. The variance looks constant in the time series plot, which makes sense since the true variance is constant at 2.64. The sample ACF looks like a good estimation of the true autocorrelations, as in the previous cases. The true value of the ACF when k=1 is -0.606, and when k=2 it is 0.379. The PACF is geometrically decreasing, as expected.
 
 When $\theta{_1}=0$. and $\theta_2=1$, we get the model
-MA(2):	$$Y_t = e_{t-2}  + e_t$$
+MA(2):    $$Y_t = e_{t-2}  + e_t$$
 where $e_t \sim NID(0, 1)$
 
 As was the case in Table 4 when $\theta{_1}=0$, there is only one spike in the sample ACF, at k=2. The sample PACF is geometrically decreasing, also as expected.
@@ -189,6 +182,7 @@ When $\theta{_1}=0.8$, and $\theta_2=1$ the process is in most aspects similar t
 \newpage
 
 # Study for AR(1)
+
 An autoregressive process of order 1, an AR(1), is a *recursive* process, where $Y_t$ depends on itself one period back, as well as some white noise $e_t$. More specifically, we have the model:
 
 $$Y_{t}=\phi_{1} Y_{t-1}+e_{t}$$
