@@ -64,7 +64,7 @@ Each stochastic process implies a theoretical structure of the autocorrelation f
 
 Each section in the paper starts with a general discussion about the process in question, followed by a simulation part where we generate a sample based on the process in question. In that way, we can study the correlogram of the process. One important aspect of the discussion is whether a particular process is covariance stationary or not since this has major implications for how to work with the process. The sample size in the simulations is set to 5000 (if nothing else is stated), but the plots only runs up to 500. 
 
-The paper is structured as follows. In section 2, the concept of covariance stationary is defined, which will be a point of reference in most of the following discussions. Section 3 and 4 discuss the MA(1) and MA(2) processes respectively, and section 5 and 6 discuss the AR(1) and AR(2). Section 7 covers the ARMA() process, and section 8 concludes.
+The paper is structured as follows. In section 2, the concept of covariance stationary is defined, which will be a point of reference in most of the following discussions. Section 3 and 4 discuss the MA(1) and MA(2) processes respectively, and section 5 and 6 discuss the AR(1) and AR(2). Section 7 covers the ARMA() process, and section 8 concludes. Information about the derivations of expected values can be found in Appendix A. The actual models we study can be found in Appendix B.
 
 
 \newpage
@@ -78,11 +78,7 @@ A covariance stationary process is a process where the statistical properties do
 2.	$Var(Y_t)$ constant over time
 3.	The autocovariance depends only on the distance between two observations, and not on where in time the observations are found
 
-
-
 \newpage
-
-
 
 # Study for MA(1)
 
@@ -93,12 +89,12 @@ where $e_t \sim NID(0, 1)$
 
 $Y_t$ is an output variable, $\theta$ the parameter of the process, and $e_1$ denotes the white noise. $e_t$ is identically and independently distributed with mean 0 and a constant variance. Since it is independent, the autocovariance is 0 by definition, making any kind of predictions of $e_t$ impossible. This has indications for the properties of $Y_t$, which are discussed further in Appendix A. Here however, it is sufficient just to present the resulting formulas for the statistical properties of $Y_t$:
 
-$E(Y_t)=0$
-$\gamma_0 = V(Y_t) = (1+\theta) * \sigma^2$
-$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta*\sigma^2$
-$\gamma_2 = Cov(Y_t, Y_{t-2})= 0$
-$\rho_1 = \gamma_1/\gamma_0 = \theta/(\theta^2+1)$
-$\rho_2 = \gamma_2/\gamma_0 = 0$
+$$E(Y_t)=0$$
+$$\gamma_0 = V(Y_t) = (1+\theta) * \sigma^2$$
+$$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta*\sigma^2$$
+$$\gamma_2 = Cov(Y_t, Y_{t-2})= 0$$
+$$\rho_1 = \gamma_1/\gamma_0 = \theta/(\theta^2+1)$$
+$$\rho_2 = \gamma_2/\gamma_0 = 0$$
 
 In order to have a covariance stationary MA(1) process, all three requirements for covariance stationarity must be fulfilled. Just by looking at the formula for the expected value and variance of $Y_t$, one understands that the first and second requirements indeed are fulfilled. Neither one of expressions are related to time. Moreover, to have a covariance stationary process, the autocovariances must be independent of where in the process the observations are found, and only depend on the distance between those observations. This is indeed the case, which is shown in Appendix A. As you see above, the first autocorrelation (using the lag 1) is a function of $\theta$ and $\sigma^2$, and the other covariances are simply 0. Hence, they do not depend on time, but only on the distance.
 
@@ -126,7 +122,7 @@ In the last row in Table 2, $\theta$ is increased to 2. This model is very simil
 
 In summary, all simulations of the MA(1) process, using different parameter values, generate stationary samples of data. All realizations presented here have, by visual inpsection, constant means and variances. Moreover, the autocovariances do not depend on time but only on the time lag. Finally, in all cases except for when $\theta$ is 0, we have some interdependence, making the data covariance stationary instead of strict stationary.
 
-
+\newpage
 
 # Study for MA(2)
 An MA(2) process includes not only white noise in the current and previous periods like the MA(1) process, but it also includes white noise *two* time periods back. More specifically, we have the model:
@@ -136,14 +132,12 @@ where $$e_t \sim NID(0, 1)$$
 
 As before, $Y_t$ is an output variable, and $e_t$ denotes the white noise. The $\theta_1$ parameter describes how the previous period is related to $Y_t$, and $\theta_2$ is the parameter describing how $e$ two periods back is related to $Y_t$. Moreover, $e_t$ is identically and independently distributed with mean 0 and a constant variance just as in the MA(1) process. Below, the statistical properties of an MA(2) process are presented. To see derivations and further discussion, please see Appendix A.
 
-$E(Y_t)=0$
-$\gamma_0 = V(Y_t) = (1+\theta_1^2+\theta_2^2) * \sigma^2$
-$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta_1*\sigma^2 + \theta_1*\theta_2*\sigma^2$
-$\gamma_2 = Cov(Y_t, Y_{t-2})= \theta_2*\sigma^2$
-$\rho_1  = \theta_1*(\theta_2+1) /(\theta_1^2 + \theta_2^2+1)$
-$\rho_2 = \theta_2 / (\theta_2^2 + theta_1^2+1)$
-
-\newpage
+$$E(Y_t)=0$$
+$$\gamma_0 = V(Y_t) = (1+\theta_1^2+\theta_2^2) * \sigma^2$$
+$$\gamma_1 = Cov(Y_t, Y_{t-1})=\theta_1*\sigma^2 + \theta_1*\theta_2*\sigma^2$$
+$$\gamma_2 = Cov(Y_t, Y_{t-2})= \theta_2*\sigma^2$$
+$$\rho_1  = \theta_1*(\theta_2+1) /(\theta_1^2 + \theta_2^2+1)$$
+$$\rho_2 = \theta_2 / (\theta_2^2 + theta_1^2+1)$$
 
 In conclusion, an MA(2) process should be stationary no matter what the parameters are, as long as they are finite. When it comes to the ACF, we expect spikes at k=1 and at k=2, but not thereafter, since the autocovariances for k>2 are equal to 0. Also, we expect a geometrically decreasing PACF.
 
@@ -190,6 +184,7 @@ As was the case in Table 4 when $\theta{_1}=0$, there is only one spike in the s
 
 When $\theta{_1}=0.8$, and $\theta_2=1$ the process is in most aspects similar to when $\theta_2$ is somewhat smaller.
 
+\newpage
 
 # Study for AR(1)
 An autoregressive process of order 1, an AR(1), is a *recursive* process, where $Y_t$ depends on itself one period back, as well as some white noise $e_t$. More specifically, we have the model:
@@ -199,13 +194,19 @@ Where we assume $\operatorname{Cov}\left(Y_{t}, e_{t}\right)=0$, and where $e_{t
 
 $\phi_1$ describes how $Y_t$ depends on $Y_{t-1}$, and as before, $e_t$ is identically and independently distributed with mean 0 and a constant variance. When having an AR process, it is impossible to calculate statistical properties such as expected value, variance and autocovariances without *assuming* stationarity. Thus, after the derivations have been made, one must check whether the assumptions actually are fulfilled in a particular AR(1). The full derivations are found in Appendix A, where the reasons for the neccessity of a stationarity assumption also are presented. Here, it suffices to just present the resulting formulas:
 
-$$E(Y_t)=0 \\ \gamma_0=\sigma^2/(1-\phi^2) \\ \gamma_1= \phi*\sigma^2 / (1-\phi^2) \\ \gamma_2= \phi^2*\sigma^2 / (1-\phi^2) \\ \rho_1= \phi \\ \rho_2= \phi^2$$
+$$E(Y_t)=0$$ 
+$$\gamma_0=\sigma^2/(1-\phi^2)$$
+$$\gamma_1= \phi*\sigma^2 / (1-\phi^2)$$
+$$\gamma_2= \phi^2*\sigma^2 / (1-\phi^2)$$
+$$\rho_1= \phi \\ \rho_2= \phi^2$$
 
 Once again note that these formulas are derived under the *assumption* of stationarity. Consequently, they are not valid if the assumption of stationarity is violated.
 
 Unlike as in the MA() processes, the ACF (the $\rho$:s) in an AR(1) will not drop to 0 when k>1. The reason is the recursiveness of the AR(1) process. $Y_t$ depends on it's past values, which in turn depends on *it's* past values, etc. Hence, the relationship between $Y_t$ and any $Y_{t-k}$ can be decsribed by some specific function of $\phi_1$ To illustrate, we can subtsitute $Y_{t-1}$ in the model above:
 
-AR(1): $$Y_t = \phi_1(\phi_1Y_{t-2}+e_{t-1}) + e_t \\ Y_t = \phi_1^2(\phi_1Y_{t-3}+e_{t-2})+\phi_1e_{t-1} + e_t \\ Y_t = \phi_1^3(\phi_1Y_{t-4}+e_{t-3})+\phi_1e_{t-2}+\phi_1e_{t-1} + e_t \\ etc.$$
+AR(1): $$Y_t = \phi_1(\phi_1Y_{t-2}+e_{t-1}) + e_t$$
+$$Y_t = \phi_1^2(\phi_1Y_{t-3}+e_{t-2})+\phi_1e_{t-1} + e_t$$
+$$Y_t = \phi_1^3(\phi_1Y_{t-4}+e_{t-3})+\phi_1e_{t-2}+\phi_1e_{t-1} + e_t.$$
 
 It becomes evident that that $Y_{t-2}$ is related to $Y_t$ by $\phi_1^2$, $Y_{t-3}$ by $\phi_1^3$ etc. 
 
@@ -243,7 +244,7 @@ The third cell $\phi_1=0.95$, looks even more uneven and spread out. The plot is
 For the fourth and final cell, $\phi_1=1$, creating a *random walk* process. Since $\phi_1=1$, the process is not stationary.
 In the time series plot, we can see any pretense of stationarity evaporating, as the plot has a slope. Thus, it is no longer centered around zero. It still is choppy and even more uneven than before, as the entire plot is moving downwards. The sample ACF at the top of Table 6 and this one actually look similar, if we were to disregard the oscillating ACF of $\phi_1=-0.1$ and put all the values as positive. We can thus say that ACF starts declining slower when $\phi_1$ becomes larger. PACF still remains the way we expect it to be, with only one spike
 
-
+\newpage
 
 # Study for AR(2)
 
@@ -290,8 +291,7 @@ When $\phi_1=0.7$ (and $\phi_2=0.1$ as before), the time series plot becoem less
 $$(1-0.7X-0.1X^2)=0$$
 Which generates the roots $X=1.22$ and $X=-8.22$, placing us outside the unit circle. Hence, this particular AR(2) process is stationary. The true mean is 0, and the variance is constant. Of course, the autocovariances also consequently only depends on k, and not on time, since this is the third requirement for stationarity.
 
-The true first autocorrelation is 0.778, an the second is 0.644. THIS DOES NOT MATCH THE CORRELOGRAM!!
-
+The true first autocorrelation is 0.778, and the second is 0.644. (Note:This doesn't match the correlogram.)
 
 In Table 9 in Appenx B, $\phi_2=0.2$, while $\phi_1$ is allowed to vary. In the following, each combination will be discussed.
 
@@ -331,11 +331,54 @@ We look for stationarity by analyzing the characteristic equation:
 $$(1-0.7X-0.8X^2)$$
 which gives the roots: $X_1=-1.64$ and $X_2=0.76$. Since the latter is within the unit circle, the process is -perhaps not suprisingly after inspecting the time series plot- nonstationary. The sample ACF is decreasing as k increases, and the sample PACF is showing one spike at k=1 but nothing thereafter.
 
+\newpage
 
+# Study for ARMA(1,1)
+
+An Autoregressive Moving Average Model of degree (1,1) includes both the MA(1) process and the AR(1) process. More specifically, we have the model:
+
+ARMA(1,1): $$Y_t = (\phi Y_{t-1} + e_t) - \theta e_{t-1}$$
+Wich makes it evident that $Y_t$ depends both on itself in the past period, as well as white noise in the current and past period.
+
+$\phi$ describes how $Y_t$ depends on $Y_{t-1}$ (like the parameter of the AR(1) process), $\theta$ describes how $Y_t$ depends on $e_{t-1}$ (like the parameter of the MA(1) process), and as before, $e_t$ is identically and independently distributed with mean 0 and variance 1. As in the AR case, it is impossible to derive formulas for the statistical properties of the process, whithout *assuming* stationaity. Thus, after the derivations have been made, one must check whether the assumptions actually are fulfilled in a particular ARMA(1,1). The full derivations are found in Appendix A. Here, it suffices to just present the resulting formulas:
+
+$$E(Y_t) = \frac{1}{1-\phi}$$
+$$\gamma_0=\phi \gamma_{1}+\sigma^{2}(1+\theta(\phi+\theta))$$
+$$\gamma_{1} =\frac{(\phi+\theta)(1+\phi \theta)}{1-\phi^{2}} \sigma^{2}$$
+$$\gamma_{1} =\phi\frac{(\phi+\theta)(1+\phi \theta)}{1-\phi^{2}} \sigma^{2}$$
+$$\rho_{1} =\frac{(\phi+\theta)(1+\phi \theta)}{1+2\phi\theta+\theta^2}$$ 
+$$\rho_2=\phi\frac{(\phi+\theta)(1+\phi \theta)}{1+2\phi\theta+\theta^2}$$
+
+Since the formulas have been derived under the assumption of stationarity, they are not valid in a nonstationary process. Hence, it is important to know the status of stationarity in a specific process. 
+
+An ARMA process contain both an MA and an AR part. Remember that the MA processes always are stationary, no matter what the parameter values $\theta$ are, while an AR process must be evaluated in each specific case. If the root(s) of the characteristic equation in absolute values is (are) smaller than 1, the process in question is stationary. Hence, when evaluating whether an ARMA process is stationary, we only use the AR part. One must study a specific ARMA(1,1) process with specific parameter values more in detail, to see whether it is stationary or not.
+
+This will be done in the following. We will discuss in total 6 different ARMA(1,1) processes.
+
+ARMA(1,1) is a combination of the MA(1) and AR(1) processes. We have six diffrent cells for ARMA(1,1), which means six different plots to interpret. We use the variables $\theta$ and $\phi$. We expect both the ACF and PACF to be geometrically declining.
+
+
+Table 11
+In our first table, table 11, we have $\theta = -0.4$. In the first cell, $\phi=-0.9$. Our plot looks like it hits a point of permanent decline at around 450, but is constant before that point. The line is not centered around zero,  due to the large decline. The variance could vary and not be constant (due to the decline), which makes the plot nonstationary. The ACF is oscillating but declining properly. However the speed of the decline is not that fast. PACF also declines, but faster. Here we see a tendency to decline towards zero, as after 3 "fingers" no values are significant.
+
+In our second cell $\phi=-0.8$. The plot looks exactly the same as the previous cell. ACF looks like it declines faster to zero faster compared to the previous cell. PACF also declines to zero, but seems to have three "fingers", although the third one is very close to not being significant.
+
+In our third cell $\phi = 0.9$. Here we have an interesting change, as our plot has stopped being constant. Instead we have a very shoppy plot, which huges spikes and valleys. The wild variation of the plot does suggest that the variance might not be centered. It does look like the plot is centered around zero. The ACF is declining towards zero pretty fast, and does not oscillate. The PACF also goes to zero after two "fingers". The values of $\phi$ is very close to 1, which might make it very close to being nonstationary.
+
+Table 12
+The only difference between table 11 and 12 is that $\theta = 0.4$ instead of -0.4. The values of $\phi$ are the same as in table 11 for all cells.
+
+Our first cell looks indentical to the first cell of table 11. This could be due to the fact that the absolute value of -0.9 is very close to 1. We see basically no difference between the two.
+
+Our second cell actually has a normal looking plot. It even looks fairly regular and smooth compared to the last cell of table 11. It looks fairly stationary, no values diverging randomly to a great extent. The ACF and PACF look similar to the similar cell in table 11, although the ACF seem to be declining slower. The PACF has three "fingers" before it declines to zero.
+
+The third cell behaves very similarly to its counterpart in Table 11 in all parts. The decline of the ACF is almost the same. One of the fingers in the PACF is positive instead of negative. The plot is similarly jagged and uneven, but looks centered around zero.
 
 \newpage
 
 # Conclusion
+
+We have studied five different models to see how they look as realized data. From our models we have built plots which we have analyzed. Most of the plots and tables have been within expectation. We have studies the processes of MovingAverages and AutoRegession, as well as the combination of these models, ARMA. We have also generated a large amount of theoretically correct values for these processes, which we have then compared with the data we have generated. We found MA models to be stationary. AR models are instead stationary if the absolute value of its variable $\phi$ is smaller than 1, a rule which ARMA also seems to follow. We also found that some models are just white noise, due to one or both variables being zero. The plots of MA look the most centered and stable, where as the plots of AR seem to disintegrate the closer the variable comes to 1 - they are not able to maintain stationarity. We found ARMA to occasionaly have strange plots which suddenly and swiftly declined after a certain point. In terms of partial and non-partial autocorrelation, they both seem to follow our expectations.
 
 \newpage
 

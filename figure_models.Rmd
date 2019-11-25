@@ -848,9 +848,9 @@ y_ARMA <- as.ts(y_ARMA)
                 
 ts.plot(y_AR2[1:numObsToPlot], ylab = "Y", main = "Time series plot of ARMA(1,1))")
 acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, 
-    type = "correlation", plot = T, main = "ACF of AR(2)",
+    type = "correlation", plot = T, main = "ACF of ARMA(1,1)",
     xlim=c(1,ACFLagstoPlot))
-acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of AR(2)")
+acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of ARMA(1,1)")
 par(mfrow = c(1,1)) # resets to default
 dev.off()
 ```
@@ -875,9 +875,9 @@ y_ARMA <- as.ts(y_ARMA)
                 
 ts.plot(y_AR2[1:numObsToPlot], ylab = "Y", main = "Time series plot of ARMA(1,1))")
 acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, 
-    type = "correlation", plot = T, main = "ACF of AR(2)",
+    type = "correlation", plot = T, main = "ACF of ARMA(1,1)",
     xlim=c(1,ACFLagstoPlot))
-acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of AR(2)")
+acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of ARMA(1,1)")
 par(mfrow = c(1,1)) # resets to default
 dev.off()
 ```
@@ -902,9 +902,9 @@ y_ARMA <- as.ts(y_ARMA)
                 
 ts.plot(y_AR2[1:numObsToPlot], ylab = "Y", main = "Time series plot of ARMA(1,1))")
 acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, 
-    type = "correlation", plot = T, main = "ACF of AR(2)",
+    type = "correlation", plot = T, main = "ACF of ARMA(1,1)",
     xlim=c(1,ACFLagstoPlot))
-acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of AR(2)")
+acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of ARMA(1,1)")
 par(mfrow = c(1,1)) # resets to default
 dev.off()
 ```
@@ -929,9 +929,9 @@ y_ARMA <- as.ts(y_ARMA)
                 
 ts.plot(y_AR2[1:numObsToPlot], ylab = "Y", main = "Time series plot of ARMA(1,1))")
 acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, 
-    type = "correlation", plot = T, main = "ACF of AR(2)",
+    type = "correlation", plot = T, main = "ACF of ARMA(1,1)",
     xlim=c(1,ACFLagstoPlot))
-acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of AR(2)")
+acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of ARMA(1,1)")
 par(mfrow = c(1,1)) # resets to default
 dev.off()
 ```
@@ -956,9 +956,9 @@ y_ARMA <- as.ts(y_ARMA)
                 
 ts.plot(y_AR2[1:numObsToPlot], ylab = "Y", main = "Time series plot of ARMA(1,1))")
 acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, 
-    type = "correlation", plot = T, main = "ACF of AR(2)",
+    type = "correlation", plot = T, main = "ACF of ARMA(1,1)",
     xlim=c(1,ACFLagstoPlot))
-acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of AR(2)")
+acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of ARMA(1,1)")
 par(mfrow = c(1,1)) # resets to default
 dev.off()
 ```
@@ -983,9 +983,9 @@ y_ARMA <- as.ts(y_ARMA)
                 
 ts.plot(y_AR2[1:numObsToPlot], ylab = "Y", main = "Time series plot of ARMA(1,1))")
 acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, 
-    type = "correlation", plot = T, main = "ACF of AR(2)",
+    type = "correlation", plot = T, main = "ACF of ARMA(1,1)",
     xlim=c(1,ACFLagstoPlot))
-acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of AR(2)")
+acf(y_ARMA[1:NumObsSim], lag.max = ACFLagstoPlot, type = "partial", plot = T, main = "PACF of ARMA(1,1)")
 par(mfrow = c(1,1)) # resets to default
 dev.off()
 ```
