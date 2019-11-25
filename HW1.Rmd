@@ -571,11 +571,26 @@ MA(1), $\theta = 1$, table 1, appendix B
 
 ## Derivation for ARMA(1,1)
 
-ARMA(1,1): $$Y_t = \Phi Y_{t-1} + e_t - \theta e_{t-1}$$
+ARMA(1,1): 
+
+$$Y_t = \Phi Y_{t-1} + e_t - \theta e_{t-1}$$
 
 $$e_t \sim NID(0, 1)$$
 
 ### Mean
+
+$$Y_t = \Phi Y_{t-1} + e_t - \theta e_{t-1}$$
+
+$$\begin{aligned} E\left(Y_{t}\right)
+&=E\left(\phi Y_{t-1}+e_{t}+\theta e_{t-1}\right) \\ 
+&=\phi E\left(Y_{t-1}\right)+E\left(e_{t}\right)+\theta E\left(e_{t-1}\right) \\ 
+&=\phi E\left(Y_{t}\right) \end{aligned}$$
+
+since $E\left(Y_{t-1}\right) = E\left(Y_{t-j}\right)$ for all j (stationarity property)
+
+$$E(Y_t) = \frac{1}{1-\phi}$$
+
+### Variance and autocovariance
 
 Note that:
 
@@ -597,17 +612,34 @@ Thus:
 
 $$ \begin{array}{l}{Y_{t}=\left[\frac{\theta(B)}{\phi(B)}\right] e_{t}} \\ {Y_{t}=\left[\Sigma_{j=0}^{\infty} \psi_{j} B^{j}\right] e_{t}} \\ {Y_{t}=\psi_{0} B^{0} e_{t}+\psi_{1} B^{1} e_{t}+\psi_{2} B^{2} e_{t}+\psi_{3} B^{3} e_{t}+\psi_{4} B^{4} e_{t}+\ldots} \\ {Y_{t}=\psi_{0} e_{t-0}+\psi_{1} e_{t-1}+\psi_{2} e_{t-2}+\psi_{3} e_{t-3}+\psi_{4} e_{t-4}+\ldots}\end{array} $$
 
-Thus:
+which is a general linear process. Proceed in the same way and note that the Yule-Walker equations are the same as those of an AR(1) for k > 1.
 
-### Variance
+**For k = 0:**
 
-### First autocovariance
+To simplify, let $m = E(X_t)$
 
-### Second autocovariance
+$$\begin{aligned} \gamma_{0} &=E\left[\left(Y_{t}-m\right)\left(Y_{t}-m\right)\right] \\ &=E\left[\left(\phi\left(Y_{t-1}-m\right)+e_{t}+\theta e_{t-1}\right)\left(Y_{t}-m\right)\right] \\ 
+&=\phi E\left[\left(Y_{t}-m\right)\left(Y_{t-1}-m\right)\right]+E\left[e_{t}\left(Y_{t}-m\right)\right]+\theta \underbrace{E\left[e_{t-1}\left(Y_{t}-m\right)\right]}_{\neq 0} \\ 
+&=\underbrace{\phi \gamma_{1}+\sigma^{2}}_{AR(1) \text { part }} +\theta E\left[\left(\phi\left(Y_{t-1}-m\right)+e_{t}+\theta e_{t-1}\right) e_{t-1}\right] \\ 
+&=\phi \gamma_{1}+\sigma^{2}+\theta \phi E\left[\left(Y_{t-1}-m\right) e_{t-1}\right]+\theta E\left[e_{t} e_{t-1}\right]+\theta^{2} E\left[e_{t-1}^{2}\right] \\ 
+&=\phi \gamma_{1}+\sigma^{2}(1+\theta(\phi+\theta)) \end{aligned}$$
 
-### First correlation
+**For k = 1:**
 
-### Second correlation
+$$ \begin{aligned} \gamma_{1}=& E\left[\left(Y_{t}-m\right)\left(Y_{t-1}-m\right)\right] \\=& E\left[\left(\phi\left(Y_{t-1}-m\right)+e_{t}+\theta e_{t-1}\right)\left(Y_{t-1}-m\right)\right] \\=& \phi E\left[\left(Y_{t-1}-m\right)\left(Y_{t-1}-m\right)\right]+E\left[e_{t}\left(Y_{t-1}-m\right)\right] \\ &+\theta E\left[e_{t-1}\left(Y_{t-1}-m\right)\right] \\=& \underbrace{\phi \gamma_{0}}_{\mathrm{AR}(1) \text { part }}+\theta \sigma^{2} \end{aligned} $$
+
+Solving for $\gamma_0$ and $\gamma_1$ :
+
+$$\begin{aligned} \gamma_{0} & \equiv V\left(Y_{t}\right)=\frac{1+2 \phi \theta+\theta^{2}}{1-\phi^{2}} \sigma^{2} \\ 
+\gamma_{1} & \equiv \operatorname{Cov}\left(Y_{t}, Y_{t-1}\right)=\frac{(\phi+\theta)(1+\phi \theta)}{1-\phi^{2}} \sigma^{2} \end{aligned}$$
+
+**For k > 1:**
+
+$$\begin{aligned} \gamma_{k}=& E\left[\left(Y_{t}-m\right)\left(Y_{t-k}-m\right)\right] \\=& E\left[\left(\phi\left(Y_{t-1}-m\right)+e_{t}+\theta e_{t-1}\right)\left(Y_{t-k}-m\right)\right] \\=& \phi E\left[\left(Y_{t-1}-m\right)\left(Y_{t-k}-m\right)\right]+E\left[e_{t}\left(Y_{t-k}-m\right)\right] \\ +& \theta E\left[e_{t-1}\left(Y_{t-k}-m\right)\right]+E\left[e_{t}\left(Y_{t-k}-m\right)\right] \\ =& \underbrace{\phi \gamma_{k-1}}_{\text {AR(1) part }} \end{aligned}$$
+
+### Correlation
+
+$$\rho_{k}=\left\{\begin{array}{l}{1 \text { if } k=0} \\ {\frac{(\phi+\theta)(1+\phi \theta)}{1+2 \phi \theta+\theta^{2}} \text { if }|k|=1} \\ {\phi \rho_{k-1} \text { if }|k|>1}\end{array}\right.$$
 
 \newpage
 
