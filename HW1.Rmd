@@ -56,11 +56,11 @@ sigma2        = 1    # variance of noise term
 5. Something's off with autocorrelation in AR(2)
 
 
+# Introduction {-}
 
-# 1. Introduction {-}
-Each stochastic process  implies a theoretical structure of the autocorrelation function (ACF). A particular dataset is a *realization* of some specific stochastic process. Hence, by analyzing at a sample ACF, one can approximate the underlying stochastic process, and find the proper model to estimate it, thereby being able to make forecasts. However, in order to be capable of matching a sample ACF with a theoretical one, one must first know the properties of the theoretical stochastic process and thereby it's ACF. Hence, we need to have a catalogue of theoretical ACF:s. The purpose of this paper is to review some MA(q), AR(p) and ARMA(p,q) processes, to create such a catalogue.
+Each stochastic process implies a theoretical structure of the autocorrelation function (ACF). A particular dataset is a *realization* of some specific stochastic process. Hence, by analyzing at a sample autocorrelation function (PACF), one can approximate the underlying stochastic process, and find the proper model to estimate it, thereby being able to make forecasts. However, to be capable of matching a sample ACF with a theoretical one, one must first know the properties of the theoretical stochastic process and thereby it's ACF. Hence, we need to have a catalogue of theoretical ACFs. The purpose of this paper is to review some MA(q), AR(p) and ARMA(p,q) processes, to create such a catalogue.
 
-Each section in the paper starts with a general discussion about the process in question, followed by a simulation excercise where we generate a sample based on the process in question. In that way, we can study the correlogram of the process. One important aspect of the discussion is whether a particular process is covariance stationary or not, since this has major implications for how to work with the process. The sample size in the simulations is set to 5000 (if nothing else is stated), but the plots only runs up to 500. 
+Each section in the paper starts with a general discussion about the process in question, followed by a simulation part where we generate a sample based on the process in question. In that way, we can study the correlogram of the process. One important aspect of the discussion is whether a particular process is covariance stationary or not since this has major implications for how to work with the process. The sample size in the simulations is set to 5000 (if nothing else is stated), but the plots only runs up to 500. 
 
 The paper is structured as follows. In section 2, the concept of covariance stationary is defined, which will be a point of reference in most of the following discussions. Section 3 and 4 discuss the MA(1) and MA(2) processes respectively, and section 5 and 6 discuss the AR(1) and AR(2). Section 7 covers the ARMA() process, and section 8 concludes.
 
@@ -68,7 +68,7 @@ The paper is structured as follows. In section 2, the concept of covariance stat
 \newpage
 
 
-# 2. The Concept of stationarity
+# The Concept of stationarity
 A covariance stationary process is a process where the statistical properties do not change over time. This is of importance when we are trying to estimate a process. More specifically, covariance stationarity imposes three requirements:
 1.	$E(Y_t)$ constant over time
 2.	$Var(Y_t)$ constant over time
@@ -80,7 +80,7 @@ A covariance stationary process is a process where the statistical properties do
 
 
 
-## Study for MA(1)
+# Study for MA(1)
 
 A moving average process of order 1 -an MA(1) proccess- indicates a process where the output variable $Y_t$ depends linearly on current white noise as well as white noise in the previous period. More specifically, we have the model:
 
@@ -124,7 +124,7 @@ In summary, all simulations of the MA(1) process, using different parameter valu
 
 
 
-## Study for MA(2)
+# Study for MA(2)
 An MA(2) process includes not only white noise in the current and previous periods like the MA(1) process, but it also includes white noise *two* time periods back. More specifically, we have the model:
 
 MA(2):     $$Y_t = e_t - \theta_1 e_{t-1} - \theta_2 e_{t-2}$$
@@ -187,7 +187,7 @@ As was the case in Table 4 when $\theta{_1}=0$, there is only one spike in the s
 When $\theta{_1}=0.8$, and $\theta_2=1$ the process is in most aspects similar to when $\theta_2$ is somewhat smaller.
 
 
-## Study for AR(1)
+# Study for AR(1)
 An autoregressive process of order 1, an AR(1), is a *recursive* process, where $Y_t$ depends on itself one period back, as well as some white noise $e_t$. More specifically, we have the model:
 
 $$Y_{t}=\phi_{1} Y_{t-1}+e_{t}$$
@@ -241,7 +241,7 @@ In the time series plot, we can see any pretense of stationarity evaporating, as
 
 
 
-## Study for AR(2)
+# Study for AR(2)
 
 An autoregressive process of order 2, an AR(2), is a process where $Y_t$ depends on $Y_{t-1}$ as well as $Y_{t-2}$, and some white noise $e_t$.The process is *recursive*; $Y_t$ depends on it's own past values. More specifically, we have the model:
 
